@@ -1,0 +1,44 @@
+[
+  {
+    "id": "class-1",
+    "title": "Class 1",
+    "subtitle": "Full course access",
+    "price": "INR 499",
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+  },
+  {
+    "id": "class-2",
+    "title": "Class 2",
+    "subtitle": "Full course access",
+    "price": "INR 599",
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+  },
+  {
+    "id": "class-3",
+    "title": "Class 3",
+    "subtitle": "Full course access",
+    "price": "INR 699",
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+  },
+  {
+    "id": "class-4",
+    "title": "Class 4",
+    "subtitle": "Full course access",
+    "price": "INR 799",
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+  },
+  {
+    "id": "class-5",
+    "title": "Class 5",
+    "subtitle": "Full course access",
+    "price": "INR 899",
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+  },
+  {
+    "id": "class-6",
+    "title": "Class 6",
+    "subtitle": "Full course access",
+    "price": "INR 999",
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+  }
+]

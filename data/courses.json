@@ -4,41 +4,81 @@
     "title": "Class 1",
     "subtitle": "Full course access",
     "price": "INR 499",
-    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"],
+    "resources": {
+      "meetLink": "https://meet.google.com/your-class-1-link",
+      "videos": [
+        {
+          "title": "Introduction Class",
+          "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+      ],
+      "pdfs": [
+        {
+          "title": "Class 1 Notes - Chapter 1",
+          "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+        }
+      ]
+    }
   },
   {
     "id": "class-2",
     "title": "Class 2",
     "subtitle": "Full course access",
     "price": "INR 599",
-    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"],
+    "resources": {
+      "meetLink": "",
+      "videos": [],
+      "pdfs": []
+    }
   },
   {
     "id": "class-3",
     "title": "Class 3",
     "subtitle": "Full course access",
     "price": "INR 699",
-    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"],
+    "resources": {
+      "meetLink": "",
+      "videos": [],
+      "pdfs": []
+    }
   },
   {
     "id": "class-4",
     "title": "Class 4",
     "subtitle": "Full course access",
     "price": "INR 799",
-    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"],
+    "resources": {
+      "meetLink": "",
+      "videos": [],
+      "pdfs": []
+    }
   },
   {
     "id": "class-5",
     "title": "Class 5",
     "subtitle": "Full course access",
     "price": "INR 899",
-    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"],
+    "resources": {
+      "meetLink": "",
+      "videos": [],
+      "pdfs": []
+    }
   },
   {
     "id": "class-6",
     "title": "Class 6",
     "subtitle": "Full course access",
     "price": "INR 999",
-    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"]
+    "features": ["Video lessons + notes", "Worksheets & practice tests", "Doubt support"],
+    "resources": {
+      "meetLink": "",
+      "videos": [],
+      "pdfs": []
+    }
   }
 ]

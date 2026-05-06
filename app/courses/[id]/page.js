@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import { getCourseById, getCourses } from "@/lib/courses";
 import CoursePageClient from "./CoursePageClient";
 import { getServerSession } from "next-auth/next";
-import { connectDB } from "@/lib/mongodb";
-import Payment from "@/models/Payment";
+import { authOptions } from "@/lib/auth";
+import { hasCompletedCoursePayment } from "@/lib/course-access";
 
 export async function generateStaticParams() {
   return getCourses().map((course) => ({ id: course.id }));
@@ -17,20 +17,11 @@ export default async function CoursePage({ params }) {
     notFound();
   }
 
-  const session = await getServerSession();
-  let hasPurchased = false;
-
-  if (session?.user?.id) {
-    await connectDB();
-    const payment = await Payment.findOne({
-      userId: session.user.id,
-      courseId: id,
-      status: "completed",
-    });
-    if (payment) {
-      hasPurchased = true;
-    }
-  }
+  const session = await getServerSession(authOptions);
+  const hasPurchased = await hasCompletedCoursePayment({
+    userId: session?.user?.id,
+    courseId: id,
+  });
 
   return <CoursePageClient course={course} hasPurchased={hasPurchased} />;
 }

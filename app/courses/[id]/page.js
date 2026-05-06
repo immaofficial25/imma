@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getCourseById, getCourses } from "@/lib/courses";
 import CoursePageClient from "./CoursePageClient";
 import { getServerSession } from "next-auth/next";
@@ -22,6 +22,10 @@ export default async function CoursePage({ params }) {
     userId: session?.user?.id,
     courseId: id,
   });
+
+  if (hasPurchased) {
+    redirect(`/courses/${id}/content`);
+  }
 
   return <CoursePageClient course={course} hasPurchased={hasPurchased} />;
 }

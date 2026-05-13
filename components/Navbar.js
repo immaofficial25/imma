@@ -78,6 +78,14 @@ export default function Navbar() {
                       {session.user.email}
                     </span>
                   ) : null}
+                  {session.user?.isAdmin ? (
+                    <Link
+                      href="/admin"
+                      className="inline-flex h-10 items-center justify-center rounded-full border border-zinc-200 bg-white px-4 text-sm font-semibold text-zinc-900 transition-colors hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
+                    >
+                      Admin
+                    </Link>
+                  ) : null}
                   <button
                     type="button"
                     onClick={handleLogout}

@@ -1,33 +1,31 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Footer from "@/components/Footer";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 export const metadata = {
-  title: "Courses (Class 1-6)",
-  description: "Browse Class 1 to 6 courses with pricing.",
+  title: "EduFlow Courses",
+  description: "Browse premium courses for your professional growth.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-sans">
         <Providers>
           <Navbar />
           <div className="flex flex-1 flex-col pt-24">{children}</div>
+          <Footer />
         </Providers>
       </body>
     </html>

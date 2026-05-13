@@ -4,14 +4,14 @@ import { getCourses } from "@/lib/courses";
 export default function Home() {
   const courses = getCourses();
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
+    <div className="flex flex-1 flex-col bg-background font-sans">
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-6 py-14 sm:px-10">
         <header className="flex flex-col gap-3">
-          <p className="text-sm font-medium text-zinc-600">Courses</p>
-          <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
-            Class 1 to 6 Courses
+          <p className="text-sm font-medium text-primary uppercase tracking-wider">Courses</p>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Class 4 to 8 Courses
           </h1>
-          <p className="max-w-2xl text-base leading-7 text-zinc-600">
+          <p className="max-w-2xl text-base leading-7 text-muted">
             Pick your class and start learning with structured lessons and
             practice.
           </p>

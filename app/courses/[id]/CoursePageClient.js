@@ -150,43 +150,43 @@ export default function CoursePageClient({ course, hasPurchased }) {
   }
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
+    <div className="flex flex-1 flex-col bg-background font-sans">
       <main className="mx-auto w-full max-w-3xl px-6 py-14">
-        <Link href="/" className="text-sm text-zinc-600 hover:text-zinc-950">
+        <Link href="/" className="text-sm text-muted hover:text-foreground">
           ← Back
         </Link>
 
         <h1 className="mt-6 text-3xl font-bold">{course.title}</h1>
         {course.subtitle ? (
-          <p className="mt-2 text-base text-zinc-600">{course.subtitle}</p>
+          <p className="mt-2 text-base text-muted">{course.subtitle}</p>
         ) : null}
 
         {Array.isArray(course.features) && course.features.length > 0 ? (
-          <section className="mt-8 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-zinc-950">
+          <section className="mt-8 rounded-md border border-border bg-surface p-6 shadow-sm">
+            <h2 className="text-lg font-semibold text-foreground">
               Course details
             </h2>
-            <ul className="mt-4 space-y-2 text-sm text-zinc-700">
+            <ul className="mt-4 space-y-2 text-sm text-muted">
               {course.features.map((feature) => (
-                <li key={feature} className="flex gap-2">
-                  <span className="mt-1 size-1.5 shrink-0 rounded-full bg-zinc-400/70" />
+                <li key={feature} className="flex gap-2 items-center">
+                  <span className="shrink-0 rounded-full bg-primary/60 w-1.5 h-1.5" />
                   {feature}
                 </li>
               ))}
             </ul>
           </section>
         ) : (
-          <section className="mt-8 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-zinc-950">
+          <section className="mt-8 rounded-md border border-border bg-surface p-6 shadow-sm">
+            <h2 className="text-lg font-semibold text-foreground">
               Course details
             </h2>
-            <p className="mt-3 text-sm text-zinc-600">
+            <p className="mt-3 text-sm text-muted">
               Details will be added soon.
             </p>
           </section>
         )}
 
-        <div className="mt-10 rounded-2xl bg-white p-6 shadow">
+        <div className="mt-10 rounded-md bg-surface p-6 shadow-sm border border-border">
           <div className="flex items-center justify-between">
             <span className="text-lg font-semibold">{course.price}</span>
 
@@ -197,28 +197,15 @@ export default function CoursePageClient({ course, hasPurchased }) {
                 </span>
                 <Link
                   href={`/courses/${course.id}/content`}
-                  className="rounded-xl bg-black px-6 py-3 text-white"
+                  className="rounded-md bg-primary hover:bg-primary-hover px-6 py-3 text-white transition-colors"
                 >
                   Access Course
                 </Link>
               </div>
             ) : (
               <button
-                onClick={async () => {
-                  if (status === "unauthenticated") {
-                    signIn("google", { callbackUrl: window.location.href });
-                  } else if (status === "authenticated") {
-                    setShowFlow(true);
-                  } else {
-                    const session = await getSession();
-                    if (!session) {
-                      signIn("google", { callbackUrl: window.location.href });
-                    } else {
-                      setShowFlow(true);
-                    }
-                  }
-                }}
-                className="rounded-xl bg-black px-6 py-3 text-white"
+                onClick={() => setShowFlow(true)}
+                className="rounded-md bg-primary hover:bg-primary-hover px-6 py-3 text-white transition-colors"
               >
                 Buy Now
               </button>
@@ -229,10 +216,10 @@ export default function CoursePageClient({ course, hasPurchased }) {
 
         {showFlow && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-            <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white p-8 shadow-2xl animate-in fade-in zoom-in duration-200">
+            <div className="relative w-full max-w-md overflow-hidden rounded-md bg-surface p-8 shadow-2xl animate-in fade-in zoom-in duration-200">
               <button
                 onClick={() => setShowFlow(false)}
-                className="absolute right-6 top-6 size-8 flex items-center justify-center rounded-full bg-zinc-100 text-zinc-500 hover:bg-zinc-200 hover:text-zinc-950 transition-colors"
+                className="absolute right-6 top-6 size-8 flex items-center justify-center rounded-full bg-background text-muted hover:bg-border hover:text-foreground transition-colors"
                 aria-label="Close"
               >
                 <svg
@@ -252,67 +239,72 @@ export default function CoursePageClient({ course, hasPurchased }) {
               </button>
 
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-zinc-950">
+                <h2 className="text-2xl font-bold text-foreground">
                   Complete Registration
                 </h2>
-                <p className="mt-2 text-zinc-600">
+                <p className="mt-2 text-muted">
                   Please provide your details to continue with the purchase.
                 </p>
               </div>
 
-              {status === "unauthenticated" && (
+              {(status === "unauthenticated" || status === "loading") && (
                 <div className="flex flex-col gap-4">
-                  <p className="text-sm text-zinc-600 font-medium">
-                    Sign in to secure your account
+                  <p className="text-sm text-muted font-medium">
+                    {status === "loading"
+                      ? "Checking authentication..."
+                      : "Sign in to secure your account"}
                   </p>
-                  <ContinueWithGoogleButton />
+                  <ContinueWithGoogleButton
+                    disabled={status === "loading"}
+                    aria-busy={status === "loading"}
+                  />
                 </div>
               )}
 
               {status === "authenticated" && (
                 <form onSubmit={handlePayment} className="flex flex-col gap-5">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-sm font-semibold text-zinc-900 ml-1">
+                    <label className="text-sm font-semibold text-foreground ml-1">
                       Full Name
                     </label>
                     <input
                       type="text"
                       name="name"
                       placeholder="Enter your full name"
-                      className="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3.5 text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all"
+                      className="rounded-md border border-border bg-background px-4 py-3.5 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                       required
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-sm font-semibold text-zinc-900 ml-1">
+                    <label className="text-sm font-semibold text-foreground ml-1">
                       Phone Number
                     </label>
                     <input
                       type="tel"
                       name="phone"
                       placeholder="e.g. +91 9876543210"
-                      className="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3.5 text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all"
+                      className="rounded-md border border-border bg-background px-4 py-3.5 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                       required
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-sm font-semibold text-zinc-900 ml-1">
+                    <label className="text-sm font-semibold text-foreground ml-1">
                       Referral Number (Optional)
                     </label>
                     <input
                       type="text"
                       name="referralNumber"
                       placeholder="Enter referral code if any"
-                      className="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3.5 text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all"
+                      className="rounded-md border border-border bg-background px-4 py-3.5 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isPaying}
-                    className="mt-4 flex w-full items-center justify-center rounded-2xl bg-black py-4 text-lg font-bold text-white transition-all hover:bg-zinc-800 disabled:bg-zinc-400 active:scale-[0.98]"
+                    className="mt-4 flex w-full items-center justify-center rounded-md bg-primary py-4 text-lg font-bold text-white transition-all hover:bg-primary-hover disabled:opacity-50 active:scale-[0.98]"
                   >
                     {isPaying ? (
                       <span className="flex items-center gap-2">
@@ -336,14 +328,6 @@ export default function CoursePageClient({ course, hasPurchased }) {
                 </form>
               )}
 
-              {status === "loading" && (
-                <div className="flex flex-col items-center py-10">
-                  <div className="size-10 animate-spin rounded-full border-4 border-zinc-200 border-t-black" />
-                  <p className="mt-4 text-sm font-medium text-zinc-500">
-                    Checking session...
-                  </p>
-                </div>
-              )}
             </div>
           </div>
         )}

@@ -6,6 +6,7 @@ export default function ContinueWithGoogleButton({
   className = "",
   compact = false,
   disabled = false,
+  callbackUrl,
   onClick,
   ...buttonProps
 }) {
@@ -16,7 +17,10 @@ export default function ContinueWithGoogleButton({
       onClick={(event) => {
         onClick?.(event);
         if (event.defaultPrevented) return;
-        signIn("google", { callbackUrl: "/" });
+        const finalCallbackUrl =
+          callbackUrl ||
+          (typeof window !== "undefined" ? window.location.href : "/");
+        signIn("google", { callbackUrl: finalCallbackUrl });
       }}
       disabled={disabled || buttonProps.disabled}
       className={[

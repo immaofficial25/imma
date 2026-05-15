@@ -138,27 +138,27 @@ export default async function MarketerDashboardPage({ searchParams }) {
       : null;
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
+    <div className="flex flex-1 flex-col bg-background font-sans">
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-6 py-14 sm:px-10">
         <header className="flex flex-col gap-2">
-          <p className="text-sm font-medium text-zinc-600">Marketer</p>
-          <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+          <p className="text-sm font-medium text-muted">Marketer</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             Dashboard
           </h1>
-          <p className="text-base text-zinc-600">
+          <p className="text-base text-muted">
             Marketer ID: {session.marketerId}
           </p>
           <div className="mt-2 flex flex-wrap gap-3">
             <Link
               href="/"
-              className="inline-flex h-10 items-center justify-center rounded-full border border-zinc-200 bg-white px-4 text-sm font-semibold text-zinc-900 hover:bg-zinc-50"
+              className="inline-flex h-10 items-center justify-center rounded-full border border-border bg-surface px-4 text-sm font-semibold text-foreground hover:bg-background"
             >
               Home
             </Link>
             <form method="post" action="/api/marketer/logout">
               <button
                 type="submit"
-                className="inline-flex h-10 items-center justify-center rounded-full bg-black px-4 text-sm font-semibold text-white hover:bg-zinc-800"
+                className="inline-flex h-10 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all active:scale-95"
               >
                 Logout
               </button>
@@ -168,30 +168,30 @@ export default async function MarketerDashboardPage({ searchParams }) {
           <form
             method="get"
             action="/marketer"
-            className="mt-6 flex flex-col gap-3 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm sm:flex-row sm:items-end sm:justify-between"
+            className="mt-6 flex flex-col gap-3 rounded-2xl border border-border bg-surface p-5 shadow-sm sm:flex-row sm:items-end sm:justify-between"
           >
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-zinc-900">
+              <label className="text-sm font-semibold text-foreground">
                 Month-wise filter
               </label>
               <input
                 type="month"
                 name="month"
                 defaultValue={selectedMonth?.value ?? ""}
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>
             <div className="flex flex-wrap gap-3">
               <button
                 type="submit"
-                className="inline-flex h-11 items-center justify-center rounded-xl bg-black px-5 text-sm font-semibold text-white hover:bg-zinc-800"
+                className="inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all"
               >
                 Apply
               </button>
               {selectedMonth ? (
                 <Link
                   href="/marketer"
-                  className="inline-flex h-11 items-center justify-center rounded-xl border border-zinc-200 bg-white px-5 text-sm font-semibold text-zinc-900 hover:bg-zinc-50"
+                  className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-surface px-5 text-sm font-semibold text-foreground hover:bg-background"
                 >
                   Reset
                 </Link>
@@ -201,53 +201,53 @@ export default async function MarketerDashboardPage({ searchParams }) {
         </header>
 
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-zinc-600">Enrollments</p>
-            <p className="mt-2 text-2xl font-semibold text-zinc-950">
+          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-sm font-medium text-muted">Enrollments</p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">
               {summary?.enrollments ?? 0}
             </p>
           </div>
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-zinc-600">Unique Students</p>
-            <p className="mt-2 text-2xl font-semibold text-zinc-950">
+          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-sm font-medium text-muted">Unique Students</p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">
               {summary?.uniqueStudents ?? 0}
             </p>
           </div>
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-zinc-600">Revenue</p>
-            <p className="mt-2 text-2xl font-semibold text-zinc-950">
+          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-sm font-medium text-muted">Revenue</p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">
               INR {summary?.revenue ?? 0}
             </p>
           </div>
         </section>
 
         {selectedMonth ? (
-          <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+          <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
             <div className="flex flex-col gap-1">
-              <h2 className="text-lg font-semibold text-zinc-950">
+              <h2 className="text-lg font-semibold text-foreground">
                 {formatMonthLabel(selectedMonth)}
               </h2>
-              <p className="text-sm text-zinc-600">
+              <p className="text-sm text-muted">
                 Month-wise enrollments attributed to your marketer ID.
               </p>
             </div>
 
             <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
-                <p className="text-sm font-medium text-zinc-600">Enrollments</p>
-                <p className="mt-2 text-2xl font-semibold text-zinc-950">
+              <div className="rounded-2xl border border-border bg-background p-5">
+                <p className="text-sm font-medium text-muted">Enrollments</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
                   {monthSummary?.enrollments ?? 0}
                 </p>
               </div>
-              <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
-                <p className="text-sm font-medium text-zinc-600">Unique Students</p>
-                <p className="mt-2 text-2xl font-semibold text-zinc-950">
+              <div className="rounded-2xl border border-border bg-background p-5">
+                <p className="text-sm font-medium text-muted">Unique Students</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
                   {monthSummary?.uniqueStudents ?? 0}
                 </p>
               </div>
-              <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
-                <p className="text-sm font-medium text-zinc-600">Revenue</p>
-                <p className="mt-2 text-2xl font-semibold text-zinc-950">
+              <div className="rounded-2xl border border-border bg-background p-5">
+                <p className="text-sm font-medium text-muted">Revenue</p>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
                   INR {monthSummary?.revenue ?? 0}
                 </p>
               </div>
@@ -255,18 +255,18 @@ export default async function MarketerDashboardPage({ searchParams }) {
           </section>
         ) : null}
 
-        <section className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <div className="px-6 py-5">
-            <h2 className="text-lg font-semibold text-zinc-950">
+            <h2 className="text-lg font-semibold text-foreground">
               Last 12 months
             </h2>
-            <p className="mt-1 text-sm text-zinc-600">
+            <p className="mt-1 text-sm text-muted">
               Click a month to filter.
             </p>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-zinc-50 text-xs font-semibold uppercase tracking-wide text-zinc-600">
+              <thead className="bg-background text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>
                   <th className="px-5 py-3">Month</th>
                   <th className="px-5 py-3">Enrollments</th>
@@ -274,10 +274,10 @@ export default async function MarketerDashboardPage({ searchParams }) {
                   <th className="px-5 py-3">Revenue</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200">
+              <tbody className="divide-y divide-border">
                 {monthBreakdown.length === 0 ? (
                   <tr>
-                    <td className="px-5 py-6 text-zinc-600" colSpan={4}>
+                    <td className="px-5 py-6 text-muted" colSpan={4}>
                       No enrollments yet.
                     </td>
                   </tr>
@@ -294,16 +294,16 @@ export default async function MarketerDashboardPage({ searchParams }) {
                         <td className="px-5 py-4">
                           <Link
                             href={`/marketer?month=${encodeURIComponent(monthValue)}`}
-                            className="font-semibold text-zinc-950 hover:underline"
+                            className="font-semibold text-foreground hover:underline"
                           >
                             {label}
                           </Link>
                         </td>
-                        <td className="px-5 py-4 text-zinc-700">{row.enrollments}</td>
-                        <td className="px-5 py-4 text-zinc-700">
+                        <td className="px-5 py-4 text-foreground/80">{row.enrollments}</td>
+                        <td className="px-5 py-4 text-foreground/80">
                           {row.uniqueStudents}
                         </td>
-                        <td className="px-5 py-4 text-zinc-700">
+                        <td className="px-5 py-4 text-foreground/80">
                           INR {row.revenue}
                         </td>
                       </tr>
@@ -315,20 +315,20 @@ export default async function MarketerDashboardPage({ searchParams }) {
           </div>
         </section>
 
-        <section className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <div className="px-6 py-5">
-            <h2 className="text-lg font-semibold text-zinc-950">
+            <h2 className="text-lg font-semibold text-foreground">
               {selectedMonth
                 ? `Enrollments for ${formatMonthLabel(selectedMonth)}`
                 : "Recent Enrollments"}
             </h2>
-            <p className="mt-1 text-sm text-zinc-600">
+            <p className="mt-1 text-sm text-muted">
               Completed payments using your marketer ID.
             </p>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-zinc-50 text-xs font-semibold uppercase tracking-wide text-zinc-600">
+              <thead className="bg-background text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>
                   <th className="px-5 py-3">Created</th>
                   <th className="px-5 py-3">Student</th>
@@ -337,10 +337,10 @@ export default async function MarketerDashboardPage({ searchParams }) {
                   <th className="px-5 py-3">Order</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200">
+              <tbody className="divide-y divide-border">
                 {recentPayments.length === 0 ? (
                   <tr>
-                    <td className="px-5 py-6 text-zinc-600" colSpan={5}>
+                    <td className="px-5 py-6 text-muted" colSpan={5}>
                       No enrollments found.
                     </td>
                   </tr>
@@ -352,13 +352,13 @@ export default async function MarketerDashboardPage({ searchParams }) {
 
                     return (
                       <tr key={payment._id}>
-                        <td className="px-5 py-4 text-zinc-700">{createdAt}</td>
-                        <td className="px-5 py-4 text-zinc-700">{payment.email}</td>
-                        <td className="px-5 py-4 text-zinc-700">{payment.courseId}</td>
-                        <td className="px-5 py-4 text-zinc-700">
+                        <td className="px-5 py-4 text-muted">{createdAt}</td>
+                        <td className="px-5 py-4 text-foreground/80">{payment.email}</td>
+                        <td className="px-5 py-4 text-foreground/80">{payment.courseId}</td>
+                        <td className="px-5 py-4 text-foreground/80">
                           INR {payment.amount}
                         </td>
-                        <td className="px-5 py-4 font-mono text-xs text-zinc-700">
+                        <td className="px-5 py-4 font-mono text-xs text-muted">
                           {payment.razorpayOrderId}
                         </td>
                       </tr>

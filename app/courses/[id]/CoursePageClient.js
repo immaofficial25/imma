@@ -2,7 +2,19 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  ArrowLeft, 
+  CheckCircle2, 
+  CreditCard, 
+  X, 
+  Phone, 
+  User, 
+  ShieldCheck, 
+  ChevronRight,
+  Info
+} from "lucide-react";
 import ContinueWithGoogleButton from "@/components/ContinueWithGoogleButton";
 
 function loadRazorpayScript() {
@@ -93,7 +105,6 @@ export default function CoursePageClient({ course, hasPurchased }) {
           phone: phone,
           referralNumber: referralNumber,
         }),
-
       });
 
       const order = await orderRes.json();
@@ -106,7 +117,7 @@ export default function CoursePageClient({ course, hasPurchased }) {
         key,
         amount: order.amount,
         currency: order.currency,
-        name: "Your Course Platform",
+        name: "IMMA Courses",
         description: course.title,
         order_id: order.id,
         handler: async function (response) {
@@ -123,8 +134,7 @@ export default function CoursePageClient({ course, hasPurchased }) {
 
             const verifyData = await verifyRes.json();
             if (verifyRes.ok && verifyData.success) {
-              alert("Payment verified and completed successfully!");
-              window.location.reload(); // Or redirect to a success page
+              window.location.reload();
             } else {
               alert(verifyData?.error ?? "Payment verification failed");
             }
@@ -138,7 +148,7 @@ export default function CoursePageClient({ course, hasPurchased }) {
           contact: phone,
         },
         theme: {
-          color: "#000000",
+          color: "#6366F1",
         },
       };
 
@@ -150,188 +160,224 @@ export default function CoursePageClient({ course, hasPurchased }) {
   }
 
   return (
-    <div className="flex flex-1 flex-col bg-background font-sans">
-      <main className="mx-auto w-full max-w-3xl px-6 py-14">
-        <Link href="/" className="text-sm text-muted hover:text-foreground">
-          ← Back
+    <div className="relative flex flex-1 flex-col overflow-hidden bg-background font-sans">
+      {/* Decorative background glow */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
+
+      <main className="relative mx-auto w-full max-w-4xl px-6 py-12 lg:py-20">
+        <Link 
+          href="/" 
+          className="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-primary transition-colors group"
+        >
+          <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+          Back to Courses
         </Link>
 
-        <h1 className="mt-6 text-3xl font-bold">{course.title}</h1>
-        {course.subtitle ? (
-          <p className="mt-2 text-base text-muted">{course.subtitle}</p>
-        ) : null}
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Main Content */}
+          <div className="lg:col-span-7 space-y-10">
+            <header className="space-y-4">
+              <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+                {course.title}
+              </h1>
+              {course.subtitle && (
+                <p className="text-xl text-muted leading-relaxed">
+                  {course.subtitle}
+                </p>
+              )}
+            </header>
 
-        {Array.isArray(course.features) && course.features.length > 0 ? (
-          <section className="mt-8 rounded-md border border-border bg-surface p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-foreground">
-              Course details
-            </h2>
-            <ul className="mt-4 space-y-2 text-sm text-muted">
-              {course.features.map((feature) => (
-                <li key={feature} className="flex gap-2 items-center">
-                  <span className="shrink-0 rounded-full bg-primary/60 w-1.5 h-1.5" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </section>
-        ) : (
-          <section className="mt-8 rounded-md border border-border bg-surface p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-foreground">
-              Course details
-            </h2>
-            <p className="mt-3 text-sm text-muted">
-              Details will be added soon.
-            </p>
-          </section>
-        )}
-
-        <div className="mt-10 rounded-md bg-surface p-6 shadow-sm border border-border">
-          <div className="flex items-center justify-between">
-            <span className="text-lg font-semibold">{course.price}</span>
-
-            {hasPurchased ? (
+            <section className="glass rounded-2xl p-8 space-y-6">
               <div className="flex items-center gap-2">
-                <span className="rounded-lg bg-green-100 px-3 py-1 text-sm font-medium text-green-700">
-                  Purchased
-                </span>
-                <Link
-                  href={`/courses/${course.id}/content`}
-                  className="rounded-md bg-primary hover:bg-primary-hover px-6 py-3 text-white transition-colors"
-                >
-                  Access Course
-                </Link>
+                <Info className="size-5 text-primary" />
+                <h2 className="text-xl font-bold text-foreground">
+                  What you&apos;ll learn
+                </h2>
               </div>
-            ) : (
-              <button
-                onClick={() => setShowFlow(true)}
-                className="rounded-md bg-primary hover:bg-primary-hover px-6 py-3 text-white transition-colors"
-              >
-                Buy Now
-              </button>
-            )}
+              
+              {Array.isArray(course.features) && course.features.length > 0 ? (
+                <ul className="grid grid-cols-1 gap-4">
+                  {course.features.map((feature) => (
+                    <li key={feature} className="flex gap-4 items-start text-muted">
+                      <div className="mt-1 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <CheckCircle2 className="size-3.5" />
+                      </div>
+                      <span className="text-base font-medium">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-muted italic">Detailed curriculum coming soon.</p>
+              )}
+            </section>
+          </div>
+
+          {/* Sticky Sidebar */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-32 overflow-hidden rounded-2xl bg-surface border border-border shadow-premium">
+              <div className="p-8 space-y-8">
+                <div className="flex items-baseline justify-between">
+                  <span className="text-sm font-bold text-muted uppercase tracking-widest">Price</span>
+                  <span className="text-4xl font-black text-foreground">{course.price}</span>
+                </div>
+
+                {hasPurchased ? (
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 rounded-xl bg-green-500/10 p-4 text-green-600 ring-1 ring-green-500/20">
+                      <ShieldCheck className="size-6" />
+                      <span className="text-sm font-bold">You own this course</span>
+                    </div>
+                    <Link
+                      href={`/courses/${course.id}/content`}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-4 text-lg font-bold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      Access Course
+                      <ChevronRight className="size-5" />
+                    </Link>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setShowFlow(true)}
+                    className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary py-4 text-lg font-bold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -translate-x-full group-hover:animate-shimmer" />
+                    Enroll Now
+                    <CreditCard className="size-5" />
+                  </button>
+                )}
+
+                <div className="pt-6 border-t border-black/5 space-y-4">
+                  <p className="text-xs font-medium text-muted/60 text-center">
+                    Secure checkout powered by Razorpay
+                  </p>
+                  <div className="flex justify-center gap-6 opacity-30 grayscale contrast-125">
+                    {/* Placeholder for card icons if needed */}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-
-        {showFlow && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-            <div className="relative w-full max-w-md overflow-hidden rounded-md bg-surface p-8 shadow-2xl animate-in fade-in zoom-in duration-200">
-              <button
+        {/* Registration Modal */}
+        <AnimatePresence>
+          {showFlow && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 onClick={() => setShowFlow(false)}
-                className="absolute right-6 top-6 size-8 flex items-center justify-center rounded-full bg-background text-muted hover:bg-border hover:text-foreground transition-colors"
-                aria-label="Close"
+                className="absolute inset-0 bg-background/80 backdrop-blur-xl"
+              />
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className="relative w-full max-w-md overflow-hidden rounded-3xl bg-surface p-8 shadow-2xl ring-1 ring-black/5"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <button
+                  onClick={() => setShowFlow(false)}
+                  className="absolute right-6 top-6 flex size-8 items-center justify-center rounded-full bg-black/5 text-muted transition-all hover:bg-black/10 hover:text-foreground"
                 >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
-              </button>
+                  <X className="size-4" />
+                </button>
 
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold text-foreground">
-                  Complete Registration
-                </h2>
-                <p className="mt-2 text-muted">
-                  Please provide your details to continue with the purchase.
-                </p>
-              </div>
-
-              {(status === "unauthenticated" || status === "loading") && (
-                <div className="flex flex-col gap-4">
-                  <p className="text-sm text-muted font-medium">
-                    {status === "loading"
-                      ? "Checking authentication..."
-                      : "Sign in to secure your account"}
+                <div className="mb-8 space-y-2">
+                  <h2 className="text-2xl font-black text-foreground">
+                    Enroll in Course
+                  </h2>
+                  <p className="text-muted font-medium">
+                    Secure your spot and start learning today.
                   </p>
-                  <ContinueWithGoogleButton
-                    disabled={status === "loading"}
-                    aria-busy={status === "loading"}
-                  />
                 </div>
-              )}
 
-              {status === "authenticated" && (
-                <form onSubmit={handlePayment} className="flex flex-col gap-5">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-sm font-semibold text-foreground ml-1">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Enter your full name"
-                      className="rounded-md border border-border bg-background px-4 py-3.5 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
-                      required
+                {(status === "unauthenticated" || status === "loading") ? (
+                  <div className="space-y-6 text-center py-4">
+                    <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-primary/10">
+                      <User className="size-8 text-primary" />
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-sm font-bold text-foreground">Sign in Required</p>
+                      <p className="text-xs text-muted leading-relaxed">
+                        To track your progress and access course materials, please sign in with your Google account.
+                      </p>
+                    </div>
+                    <ContinueWithGoogleButton
+                      className="!w-full !rounded-xl !py-6"
+                      disabled={status === "loading"}
                     />
                   </div>
+                ) : (
+                  <form onSubmit={handlePayment} className="space-y-6">
+                    <div className="space-y-2">
+                      <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted ml-1">
+                        <User className="size-3" />
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        defaultValue={status === "authenticated" ? (useSession().data?.user?.name || "") : ""}
+                        placeholder="e.g. John Doe"
+                        className="w-full rounded-xl border border-border bg-background px-4 py-4 text-foreground placeholder:text-muted/50 focus:border-primary/50 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all"
+                        required
+                      />
+                    </div>
 
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-sm font-semibold text-foreground ml-1">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      placeholder="e.g. +91 9876543210"
-                      className="rounded-md border border-border bg-background px-4 py-3.5 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
-                      required
-                    />
-                  </div>
+                    <div className="space-y-2">
+                      <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted ml-1">
+                        <Phone className="size-3" />
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="e.g. +91 9876543210"
+                        className="w-full rounded-xl border border-border bg-background px-4 py-4 text-foreground placeholder:text-muted/50 focus:border-primary/50 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all"
+                        required
+                      />
+                    </div>
 
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-sm font-semibold text-foreground ml-1">
-                      Referral Number (Optional)
-                    </label>
-                    <input
-                      type="text"
-                      name="referralNumber"
-                      placeholder="Enter referral code if any"
-                      className="rounded-md border border-border bg-background px-4 py-3.5 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
-                    />
-                  </div>
+                    <div className="space-y-2">
+                      <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted ml-1">
+                        <ShieldCheck className="size-3" />
+                        Referral Number (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        name="referralNumber"
+                        placeholder="Enter code if any"
+                        className="w-full rounded-xl border border-border bg-background px-4 py-4 text-foreground placeholder:text-muted/50 focus:border-primary/50 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all"
+                      />
+                    </div>
 
-                  <button
-                    type="submit"
-                    disabled={isPaying}
-                    className="mt-4 flex w-full items-center justify-center rounded-md bg-primary py-4 text-lg font-bold text-white transition-all hover:bg-primary-hover disabled:opacity-50 active:scale-[0.98]"
-                  >
-                    {isPaying ? (
-                      <span className="flex items-center gap-2">
-                        <svg
-                          className="animate-spin"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                        >
-                          <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                        </svg>
-                        Opening Razorpay...
-                      </span>
-                    ) : (
-                      "Continue to Pay"
-                    )}
-                  </button>
-                </form>
-              )}
-
+                    <button
+                      type="submit"
+                      disabled={isPaying}
+                      className="group relative mt-2 flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-primary py-4 text-lg font-bold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-hover disabled:opacity-50 active:scale-[0.98]"
+                    >
+                      {isPaying ? (
+                        <div className="flex items-center gap-3">
+                          <svg className="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                          </svg>
+                          <span>Processing...</span>
+                        </div>
+                      ) : (
+                        <>
+                          Complete Enrollment
+                          <ChevronRight className="size-5 transition-transform group-hover:translate-x-1" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </motion.div>
             </div>
-          </div>
-        )}
-
+          )}
+        </AnimatePresence>
       </main>
     </div>
   );

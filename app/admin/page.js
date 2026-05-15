@@ -85,47 +85,47 @@ export default async function AdminPage({ searchParams }) {
   );
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 font-sans">
+    <div className="flex flex-1 flex-col bg-background font-sans">
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-6 py-14 sm:px-10">
         <header className="flex flex-col gap-2">
-          <p className="text-sm font-medium text-zinc-600">Admin</p>
-          <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+          <p className="text-sm font-medium text-muted">Admin</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             Payments Dashboard
           </h1>
-          <p className="text-base text-zinc-600">
+          <p className="text-base text-muted">
             Signed in as {session.user.email}
           </p>
         </header>
 
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-zinc-600">Pending</p>
-            <p className="mt-2 text-2xl font-semibold text-zinc-950">
+          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-sm font-medium text-muted">Pending</p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">
               {pendingCount}
             </p>
           </div>
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-zinc-600">Completed</p>
-            <p className="mt-2 text-2xl font-semibold text-zinc-950">
+          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-sm font-medium text-muted">Completed</p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">
               {completedCount}
             </p>
           </div>
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-zinc-600">Failed</p>
-            <p className="mt-2 text-2xl font-semibold text-zinc-950">
+          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-sm font-medium text-muted">Failed</p>
+            <p className="mt-2 text-2xl font-semibold text-foreground">
               {failedCount}
             </p>
           </div>
         </section>
 
-        <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-medium text-zinc-600">Marketers</p>
-              <h2 className="mt-1 text-xl font-semibold text-zinc-950">
+              <p className="text-sm font-medium text-muted">Marketers</p>
+              <h2 className="mt-1 text-xl font-semibold text-foreground">
                 Referral Performance
               </h2>
-              <p className="mt-1 text-sm text-zinc-600">
+              <p className="mt-1 text-sm text-muted">
                 Enrollment counts are based on completed payments where Referral Number matches the marketer ID.
               </p>
             </div>
@@ -137,74 +137,74 @@ export default async function AdminPage({ searchParams }) {
             className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-5"
           >
             <div className="flex flex-col gap-1.5 sm:col-span-2">
-              <label className="text-sm font-semibold text-zinc-900">
+              <label className="text-sm font-semibold text-foreground">
                 Marketer ID
               </label>
               <input
                 name="marketerId"
                 placeholder="e.g. MKT1001"
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 required
               />
             </div>
 
             <div className="flex flex-col gap-1.5 sm:col-span-2">
-              <label className="text-sm font-semibold text-zinc-900">Name</label>
+              <label className="text-sm font-semibold text-foreground">Name</label>
               <input
                 name="name"
                 placeholder="Optional"
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>
 
             <div className="flex items-end">
               <button
                 type="submit"
-                className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-black px-5 text-sm font-semibold text-white hover:bg-zinc-800"
+                className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all active:scale-95"
               >
                 Add marketer
               </button>
             </div>
 
             <div className="flex flex-col gap-1.5 sm:col-span-2">
-              <label className="text-sm font-semibold text-zinc-900">
+              <label className="text-sm font-semibold text-foreground">
                 Password
               </label>
               <input
                 type="password"
                 name="password"
                 placeholder="At least 6 characters"
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 required
               />
             </div>
 
             <div className="flex flex-col gap-1.5 sm:col-span-2">
-              <label className="text-sm font-semibold text-zinc-900">Email</label>
+              <label className="text-sm font-semibold text-foreground">Email</label>
               <input
                 name="email"
                 placeholder="Optional"
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>
 
             <div className="flex flex-col gap-1.5 sm:col-span-2">
-              <label className="text-sm font-semibold text-zinc-900">
+              <label className="text-sm font-semibold text-foreground">
                 Phone Number
               </label>
               <input
                 name="phoneNumber"
                 placeholder="Optional"
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-zinc-900">Active</label>
+              <label className="text-sm font-semibold text-foreground">Active</label>
               <select
                 name="isActive"
                 defaultValue="true"
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               >
                 <option value="true">Active</option>
                 <option value="false">Inactive</option>
@@ -213,10 +213,10 @@ export default async function AdminPage({ searchParams }) {
           </form>
         </section>
 
-        <section className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-zinc-50 text-xs font-semibold uppercase tracking-wide text-zinc-600">
+              <thead className="bg-background text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>
                   <th className="px-5 py-3">Marketer</th>
                   <th className="px-5 py-3">Enrollments</th>
@@ -227,10 +227,10 @@ export default async function AdminPage({ searchParams }) {
                   <th className="px-5 py-3">Created</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200">
+              <tbody className="divide-y divide-border">
                 {marketers.length === 0 ? (
                   <tr>
-                    <td className="px-5 py-6 text-zinc-600" colSpan={6}>
+                    <td className="px-5 py-6 text-muted" colSpan={6}>
                       No marketers created yet.
                     </td>
                   </tr>
@@ -245,34 +245,34 @@ export default async function AdminPage({ searchParams }) {
                       <tr key={marketer._id}>
                         <td className="px-5 py-4">
                           <div className="flex flex-col">
-                            <span className="font-medium text-zinc-950">
+                            <span className="font-medium text-foreground">
                               {marketer.marketerId}
                             </span>
-                            <span className="text-zinc-600">
+                            <span className="text-muted">
                               {marketer.name || marketer.email || "-"}
                             </span>
                           </div>
                         </td>
-                        <td className="px-5 py-4 text-zinc-700">
+                        <td className="px-5 py-4 text-foreground/80">
                           {stats?.enrollments ?? 0}
                         </td>
-                        <td className="px-5 py-4 text-zinc-700">
+                        <td className="px-5 py-4 text-foreground/80">
                           {stats?.uniqueStudents ?? 0}
                         </td>
-                        <td className="px-5 py-4 text-zinc-700">
+                        <td className="px-5 py-4 text-foreground/80">
                           INR {stats?.revenue ?? 0}
                         </td>
                         <td className="px-5 py-4">
-                          <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-700">
+                          <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-semibold text-muted">
                             {marketer.passwordHash ? "set" : "not set"}
                           </span>
                         </td>
                         <td className="px-5 py-4">
-                          <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-700">
+                          <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-semibold text-muted">
                             {marketer.isActive ? "active" : "inactive"}
                           </span>
                         </td>
-                        <td className="px-5 py-4 text-zinc-700">{createdAt}</td>
+                        <td className="px-5 py-4 text-muted">{createdAt}</td>
                       </tr>
                     );
                   })
@@ -282,24 +282,24 @@ export default async function AdminPage({ searchParams }) {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
           <form className="grid grid-cols-1 gap-4 sm:grid-cols-4" method="get">
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-zinc-900">Search</label>
+              <label className="text-sm font-semibold text-foreground">Search</label>
               <input
                 name="q"
                 defaultValue={queryText}
                 placeholder="Email, name, phone, order id"
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-zinc-900">Status</label>
+              <label className="text-sm font-semibold text-foreground">Status</label>
               <select
                 name="status"
                 defaultValue={status}
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               >
                 <option value="">All</option>
                 <option value="pending">Pending</option>
@@ -309,11 +309,11 @@ export default async function AdminPage({ searchParams }) {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-zinc-900">Course</label>
+              <label className="text-sm font-semibold text-foreground">Course</label>
               <select
                 name="courseId"
                 defaultValue={courseId}
-                className="h-11 rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-950 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               >
                 <option value="">All</option>
                 {courses.map((course) => (
@@ -327,7 +327,7 @@ export default async function AdminPage({ searchParams }) {
             <div className="flex items-end">
               <button
                 type="submit"
-                className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-black px-5 text-sm font-semibold text-white hover:bg-zinc-800"
+                className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all active:scale-95"
               >
                 Apply
               </button>
@@ -335,10 +335,10 @@ export default async function AdminPage({ searchParams }) {
           </form>
         </section>
 
-        <section className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-zinc-50 text-xs font-semibold uppercase tracking-wide text-zinc-600">
+              <thead className="bg-background text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>
                   <th className="px-5 py-3">Created</th>
                   <th className="px-5 py-3">User</th>
@@ -349,10 +349,10 @@ export default async function AdminPage({ searchParams }) {
                   <th className="px-5 py-3">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200">
+              <tbody className="divide-y divide-border">
                 {payments.length === 0 ? (
                   <tr>
-                    <td className="px-5 py-6 text-zinc-600" colSpan={7}>
+                    <td className="px-5 py-6 text-muted" colSpan={7}>
                       No payments found.
                     </td>
                   </tr>
@@ -366,34 +366,34 @@ export default async function AdminPage({ searchParams }) {
 
                     return (
                       <tr key={payment._id}>
-                        <td className="px-5 py-4 text-zinc-700">{createdAt}</td>
+                        <td className="px-5 py-4 text-muted">{createdAt}</td>
                         <td className="px-5 py-4">
                           <div className="flex flex-col">
-                            <span className="font-medium text-zinc-950">
+                            <span className="font-medium text-foreground">
                               {payment.email}
                             </span>
-                            <span className="text-zinc-600">
+                            <span className="text-muted">
                               {payment.name} · {payment.phoneNumber}
                             </span>
                           </div>
                         </td>
-                        <td className="px-5 py-4 text-zinc-700">
+                        <td className="px-5 py-4 text-foreground/80">
                           <div className="flex flex-col">
-                            <span className="font-medium text-zinc-950">
+                            <span className="font-medium text-foreground">
                               {course?.title ?? payment.courseId}
                             </span>
-                            <span className="text-zinc-600">{payment.courseId}</span>
+                            <span className="text-muted">{payment.courseId}</span>
                           </div>
                         </td>
-                        <td className="px-5 py-4 text-zinc-700">
+                        <td className="px-5 py-4 text-foreground/80">
                           INR {payment.amount}
                         </td>
                         <td className="px-5 py-4">
-                          <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-700">
+                          <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-semibold text-muted">
                             {payment.status}
                           </span>
                         </td>
-                        <td className="px-5 py-4 font-mono text-xs text-zinc-700">
+                        <td className="px-5 py-4 font-mono text-xs text-muted">
                           {payment.razorpayOrderId}
                         </td>
                         <td className="px-5 py-4">
@@ -412,7 +412,7 @@ export default async function AdminPage({ searchParams }) {
                                   <input type="hidden" name="status" value="failed" />
                                   <button
                                     type="submit"
-                                    className="inline-flex h-9 items-center justify-center rounded-lg border border-zinc-200 bg-white px-3 text-xs font-semibold text-zinc-900 hover:bg-zinc-50"
+                                    className="inline-flex h-9 items-center justify-center rounded-lg border border-border bg-surface px-3 text-xs font-semibold text-foreground hover:bg-muted/10"
                                   >
                                     Mark failed
                                   </button>
@@ -435,7 +435,7 @@ export default async function AdminPage({ searchParams }) {
                                   />
                                   <button
                                     type="submit"
-                                    className="inline-flex h-9 items-center justify-center rounded-lg border border-zinc-200 bg-white px-3 text-xs font-semibold text-zinc-900 hover:bg-zinc-50"
+                                    className="inline-flex h-9 items-center justify-center rounded-lg border border-border bg-surface px-3 text-xs font-semibold text-foreground hover:bg-muted/10"
                                   >
                                     Mark pending
                                   </button>
@@ -443,7 +443,7 @@ export default async function AdminPage({ searchParams }) {
                               ) : null}
                             </div>
                           ) : (
-                            <span className="text-xs text-zinc-500">Locked</span>
+                            <span className="text-xs text-muted/60">Locked</span>
                           )}
                         </td>
                       </tr>

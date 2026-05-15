@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "EduFlow Courses",
-  description: "Browse premium courses for your professional growth.",
+  title: "Indian Mind Meld Academy | IMMA",
+  description: "Modern online learning platform for Class 4–8 students focused on skill-based and career-oriented education.",
 };
 
 export default function RootLayout({ children }) {

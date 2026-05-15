@@ -4,6 +4,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
+import { Home, BookOpen, User, LogOut, LayoutDashboard } from "lucide-react";
 import ContinueWithGoogleButton from "@/components/ContinueWithGoogleButton";
 
 export default function Navbar() {
@@ -22,86 +23,100 @@ export default function Navbar() {
   };
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+    <div className="pointer-events-none fixed inset-x-0 top-6 z-50 flex justify-center px-6">
       <nav
         aria-label="Primary"
-        className="pointer-events-auto w-full max-w-4xl"
+        className="pointer-events-auto w-full max-w-5xl"
       >
-        <div className="rounded-full border border-zinc-200/80 bg-white/80 p-2 shadow-lg shadow-zinc-900/5 backdrop-blur-md">
-          <div className="flex items-center justify-between gap-2">
+        <div className="glass rounded-full px-3 py-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] ring-1 ring-border">
+          <div className="flex items-center justify-between gap-4">
             <Link
               href="/"
-              className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold tracking-tight text-zinc-950 hover:bg-zinc-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
+              className="flex items-center gap-2.5 rounded-full px-3 py-1.5 transition-all hover:bg-muted/10"
               aria-label="Go to home"
             >
-              <span className="grid size-8 place-items-center rounded-full bg-zinc-950 text-xs font-bold text-white">
+              <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-black text-white shadow-lg shadow-primary/20">
                 IM
+              </div>
+              <span className="hidden font-bold tracking-tight text-foreground sm:inline-block">
+                IMMA <span className="text-primary">Courses</span>
               </span>
-              <span className="hidden sm:inline">IMMA Courses</span>
             </Link>
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1.5 rounded-full bg-muted/5 p-1 ring-1 ring-border">
               <Link
                 href="/"
-                className="rounded-full px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-950/5 hover:text-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
+                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-muted transition-all hover:bg-muted/10 hover:text-foreground"
               >
-                Home
+                <Home className="size-4" />
+                <span className="hidden md:inline">Home</span>
               </Link>
               <Link
                 href="/#courses"
-                className="rounded-full px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-950/5 hover:text-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
+                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-muted transition-all hover:bg-muted/10 hover:text-foreground"
               >
-                Courses
+                <BookOpen className="size-4" />
+                <span className="hidden md:inline">Courses</span>
               </Link>
             </div>
 
-            <div
-              className="flex items-center gap-3 transition-all duration-200"
-              suppressHydrationWarning
-            >
+            <div className="flex items-center gap-4">
               {isLoading ? (
-                <div className="h-10 w-[140px] rounded-full bg-zinc-200/70" />
+                <div className="h-10 w-24 animate-pulse rounded-full bg-muted/10" />
               ) : session ? (
-                <>
+                <div className="flex items-center gap-3">
+                  <div className="hidden flex-col items-end gap-0.5 sm:flex">
+                    <span className="text-xs font-bold text-foreground line-clamp-1">
+                      {session.user?.name || "User"}
+                    </span>
+                    <span className="text-[10px] font-medium text-muted line-clamp-1 uppercase tracking-wider">
+                      {session.user?.isAdmin ? "Administrator" : "Student"}
+                    </span>
+                  </div>
+                  
                   {session.user?.image ? (
                     <Image
                       src={session.user.image}
                       alt="User avatar"
-                      width={36}
-                      height={36}
-                      className="hidden size-9 rounded-full ring-1 ring-zinc-200 sm:block"
+                      width={40}
+                      height={40}
+                      className="size-10 rounded-full ring-2 ring-primary/20 shadow-lg shadow-primary/10"
                       referrerPolicy="no-referrer"
                     />
-                  ) : null}
-                  {session.user?.email ? (
-                    <span className="hidden text-sm text-zinc-600 sm:block">
-                      {session.user.email}
-                    </span>
-                  ) : null}
-                  {session.user?.isAdmin ? (
-                    <Link
-                      href="/admin"
-                      className="inline-flex h-10 items-center justify-center rounded-full border border-zinc-200 bg-white px-4 text-sm font-semibold text-zinc-900 transition-colors hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
+                  ) : (
+                    <div className="flex size-10 items-center justify-center rounded-full bg-muted/10 ring-1 ring-border">
+                      <User className="size-5 text-muted" />
+                    </div>
+                  )}
+
+                  <div className="h-6 w-px bg-border mx-1" />
+
+                  <div className="flex items-center gap-2">
+                    {session.user?.isAdmin && (
+                      <Link
+                        href="/admin"
+                        title="Admin Dashboard"
+                        className="flex size-10 items-center justify-center rounded-full bg-muted/10 text-muted transition-all hover:bg-muted/20 hover:text-primary ring-1 ring-border"
+                      >
+                        <LayoutDashboard className="size-5" />
+                      </Link>
+                    )}
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      disabled={isSigningOut}
+                      title="Logout"
+                      className="flex size-10 items-center justify-center rounded-full bg-muted/10 text-muted transition-all hover:bg-red-500/10 hover:text-red-600 ring-1 ring-border disabled:opacity-50"
                     >
-                      Admin
-                    </Link>
-                  ) : null}
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    disabled={isSigningOut}
-                    aria-busy={isSigningOut}
-                    className="inline-flex h-10 items-center justify-center rounded-full bg-foreground px-4 text-sm font-semibold text-background transition-colors hover:bg-[#383838] focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    Logout
-                  </button>
-                </>
+                      <LogOut className="size-5" />
+                    </button>
+                  </div>
+                </div>
               ) : (
                 <ContinueWithGoogleButton
                   compact
-                  className="px-3 sm:px-4"
+                  className="!rounded-full !h-10 !bg-primary !text-white !border-none !shadow-lg !shadow-primary/20 hover:!bg-primary-hover transition-all"
                   disabled={isLoading}
-                  aria-busy={isLoading}
                 />
               )}
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 // Brand icons as SVGs since lucide-react removed them in v1.0
@@ -46,9 +47,13 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1 space-y-6">
             <Link href="/" className="flex items-center gap-2.5">
-              <div className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-black text-white shadow-lg shadow-primary/20">
-                IM
-              </div>
+              <Image
+                src="/footer_logo.png"
+                alt="IMMA Footer Logo"
+                width={200}
+                height={200}
+                className="w-[200px] h-auto object-contain drop-shadow-lg"
+              />
               <span className="text-xl font-bold tracking-tight text-foreground">
                 IMMA <span className="text-primary">Courses</span>
               </span>

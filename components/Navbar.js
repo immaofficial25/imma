@@ -35,11 +35,15 @@ export default function Navbar() {
               className="flex items-center gap-2.5 rounded-full px-3 py-1.5 transition-all hover:bg-muted/10"
               aria-label="Go to home"
             >
-              <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-black text-white shadow-lg shadow-primary/20">
-                IM
-              </div>
+              <Image
+                src="/imma_logo.png"
+                alt="IMMA Logo"
+                width={36}
+                height={36}
+                className="size-9 rounded-full shadow-lg shadow-primary/20"
+              />
               <span className="hidden font-bold tracking-tight text-foreground sm:inline-block">
-                IMMA <span className="text-primary">Courses</span>
+                IMMA Pvt. Ltd. <span className="text-primary">Courses</span>
               </span>
             </Link>
 
@@ -73,7 +77,7 @@ export default function Navbar() {
                       {session.user?.isAdmin ? "Administrator" : "Student"}
                     </span>
                   </div>
-                  
+
                   {session.user?.image ? (
                     <Image
                       src={session.user.image}

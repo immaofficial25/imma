@@ -19,11 +19,26 @@ import ContinueWithGoogleButton from "@/components/ContinueWithGoogleButton";
 
 function loadRazorpayScript() {
   return new Promise((resolve) => {
+    if (typeof window !== "undefined" && window.Razorpay) {
+      resolve(true);
+      return;
+    }
+
     const existing = document.querySelector(
       'script[src="https://checkout.razorpay.com/v1/checkout.js"]',
     );
     if (existing) {
-      resolve(true);
+      // If script exists but window.Razorpay isn't ready yet
+      const interval = setInterval(() => {
+        if (window.Razorpay) {
+          clearInterval(interval);
+          resolve(true);
+        }
+      }, 100);
+      setTimeout(() => {
+        clearInterval(interval);
+        resolve(!!window.Razorpay);
+      }, 10000); // 10 seconds timeout
       return;
     }
 
@@ -43,7 +58,7 @@ function parseRupeesAmount(value) {
 }
 
 export default function CoursePageClient({ course, hasPurchased }) {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
   const [showFlow, setShowFlow] = useState(false);
   const [isPaying, setIsPaying] = useState(false);
 
@@ -150,11 +165,23 @@ export default function CoursePageClient({ course, hasPurchased }) {
         theme: {
           color: "#6366F1",
         },
+        modal: {
+          ondismiss: function () {
+            setIsPaying(false);
+          },
+        },
       };
 
       const paymentObject = new window.Razorpay(options);
+      paymentObject.on("payment.failed", function (response) {
+        console.error("Payment failed:", response.error);
+        alert(`Payment failed: ${response.error.description}`);
+        setIsPaying(false);
+      });
       paymentObject.open();
-    } finally {
+    } catch (err) {
+      console.error("Payment initiation error:", err);
+      alert(err instanceof Error ? err.message : "Failed to open payment gateway");
       setIsPaying(false);
     }
   }
@@ -319,7 +346,7 @@ export default function CoursePageClient({ course, hasPurchased }) {
                       <input
                         type="text"
                         name="name"
-                        defaultValue={status === "authenticated" ? (useSession().data?.user?.name || "") : ""}
+                        defaultValue={status === "authenticated" ? (session?.user?.name || "") : ""}
                         placeholder="e.g. John Doe"
                         className="w-full rounded-xl border border-border bg-background px-4 py-4 text-foreground placeholder:text-muted/50 focus:border-primary/50 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all"
                         required

@@ -39,14 +39,14 @@ export default function ContactPage() {
     {
       icon: "mail",
       title: "Email Us",
-      details: "imma.official25@gmail.com",
-      href: "mailto:imma.official25@gmail.com"
+      details: "imma.academy2025@gmail.com",
+      href: "mailto:imma.academy2025@gmail.com"
     },
     {
       icon: "location",
       title: "Visit Us",
-      details: "Dhandighi, Contai, Purba Medinipur, West Bengal, 721401",
-      href: "https://maps.google.com/?q=Dhandighi,Contai,Purba+Medinipur,West+Bengal,721401"
+      details: "INDIAN MIND MELD ACADEMY Pvt. Ltd., Haldia, Purba Medinipur, West Bengal - 721654",
+      href: "https://www.google.com/maps/place/INDIAN+MIND+MELD+ACADEMY+Pvt.+Ltd./@22.0797412,88.1334886,19.54z/data=!4m6!3m5!1s0x3a02f76e7494fd3b:0xe7b4e6462c245e84!8m2!3d22.079875!4d88.1336556!16s%2Fg%2F11mkrr87cv?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D"
     }
   ];
 

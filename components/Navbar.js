@@ -28,8 +28,8 @@ export default function Navbar() {
         aria-label="Primary"
         className="pointer-events-auto w-full max-w-5xl"
       >
-        <div className="glass rounded-full px-3 py-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] ring-1 ring-border">
-          <div className="flex items-center justify-between gap-4">
+        <div className="glass rounded-full px-2 sm:px-3 py-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] ring-1 ring-border">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             <Link
               href="/"
               className="flex items-center gap-2.5 rounded-full px-3 py-1.5 transition-all hover:bg-muted/10"
@@ -43,7 +43,7 @@ export default function Navbar() {
                 className="size-9 rounded-full shadow-lg shadow-primary/20"
               />
               <span className="hidden font-bold tracking-tight text-foreground sm:inline-block">
-                IMMA Pvt. Ltd. <span className="text-primary">Courses</span>
+                IMMA Pvt. Ltd.
               </span>
             </Link>
 

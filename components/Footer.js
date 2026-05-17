@@ -41,7 +41,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-10 border-t border-border bg-surface pt-20 pb-10">
+    <footer className="relative z-10 border-t border-border bg-sky-100/40 backdrop-blur-md pt-20 pb-10">
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
           {/* Brand Column */}
@@ -52,13 +52,14 @@ export default function Footer() {
                 alt="IMMA Footer Logo"
                 width={200}
                 height={200}
-                className="w-[200px] h-auto object-contain drop-shadow-lg"
+                className="object-contain drop-shadow-lg"
+                style={{ width: '200px', height: 'auto' }}
               />
-              <span className="text-xl font-bold tracking-tight text-foreground">
+              {/* <span className="text-xl font-bold tracking-tight text-foreground">
                 IMMA <span className="text-primary">Courses</span>
-              </span>
+              </span> */}
             </Link>
-            <p className="text-sm leading-relaxed text-muted max-w-xs">
+            <p className="text-sm leading-relaxed text-muted max-w-xs break-words">
               Empowering students from Class 4 to 8 with high-quality, structured learning materials and expert guidance for a brighter academic future.
             </p>
             <div className="flex gap-4">
@@ -97,11 +98,11 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li className="flex gap-3 items-start text-sm text-muted">
                   <MapPin className="size-4 shrink-0 text-primary mt-0.5" />
-                  <span>Purba Chintamonipur, Patharpratima, West Bengal - 743371</span>
+                  <span className="break-words max-w-full">INDIAN MIND MELD ACADEMY Pvt. Ltd., Haldia, Purba Medinipur, West Bengal - 721654</span>
                 </li>
                 <li className="flex gap-3 items-center text-sm text-muted">
                   <Mail className="size-4 shrink-0 text-primary" />
-                  <span>imma.official25@gmail.com</span>
+                  <span className="break-words max-w-full">imma.academy2025@gmail.com</span>
                 </li>
                 <li className="flex gap-3 items-center text-sm text-muted">
                   <Phone className="size-4 shrink-0 text-primary" />

@@ -17,7 +17,7 @@ export default function CourseCard({ course }) {
         aria-label={`Open ${course.title}`}
         className="block group outline-none"
       >
-        <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-surface/90 p-6 transition-all duration-300 hover:border-primary/50 hover:bg-surface hover:shadow-2xl hover:shadow-primary/5">
+        <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10">
           {/* Decorative background glow */}
           <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/5 blur-3xl transition-all duration-500 group-hover:bg-primary/20" />
           

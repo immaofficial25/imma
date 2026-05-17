@@ -19,9 +19,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} h-full antialiased overflow-x-hidden w-full max-w-[100vw]`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans overflow-x-hidden w-full max-w-[100vw]">
         <Providers>
           <Navbar />
           <div className="flex flex-1 flex-col pt-24">{children}</div>

@@ -170,7 +170,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="mt-10">
-            <Link href="/#courses" className="inline-block px-8 py-4 rounded-full bg-primary text-white font-bold hover:scale-105 transition-transform shadow-lg shadow-primary/25">
+            <Link href="/courses" className="inline-block px-8 py-4 rounded-full bg-primary text-white font-bold hover:scale-105 transition-transform shadow-lg shadow-primary/25">
               Enroll Now
             </Link>
           </div>

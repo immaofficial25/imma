@@ -216,7 +216,7 @@ export default async function MarketerDashboardPage({ searchParams }) {
           <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
             <p className="text-sm font-medium text-muted">Revenue</p>
             <p className="mt-2 text-2xl font-semibold text-foreground">
-              INR {summary?.revenue ?? 0}
+              ₹{summary?.revenue ?? 0}
             </p>
           </div>
         </section>
@@ -248,7 +248,7 @@ export default async function MarketerDashboardPage({ searchParams }) {
               <div className="rounded-2xl border border-border bg-background p-5">
                 <p className="text-sm font-medium text-muted">Revenue</p>
                 <p className="mt-2 text-2xl font-semibold text-foreground">
-                  INR {monthSummary?.revenue ?? 0}
+                  ₹{monthSummary?.revenue ?? 0}
                 </p>
               </div>
             </div>
@@ -304,7 +304,7 @@ export default async function MarketerDashboardPage({ searchParams }) {
                           {row.uniqueStudents}
                         </td>
                         <td className="px-5 py-4 text-foreground/80">
-                          INR {row.revenue}
+                          ₹{row.revenue}
                         </td>
                       </tr>
                     );
@@ -356,7 +356,7 @@ export default async function MarketerDashboardPage({ searchParams }) {
                         <td className="px-5 py-4 text-foreground/80">{payment.email}</td>
                         <td className="px-5 py-4 text-foreground/80">{payment.courseId}</td>
                         <td className="px-5 py-4 text-foreground/80">
-                          INR {payment.amount}
+                          ₹{payment.amount}
                         </td>
                         <td className="px-5 py-4 font-mono text-xs text-muted">
                           {payment.razorpayOrderId}

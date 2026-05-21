@@ -81,7 +81,7 @@ export default function Footer() {
               <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">Platform</h3>
               <ul className="space-y-3">
                 <li><Link href="/" className="text-sm text-muted hover:text-primary transition-colors">Home</Link></li>
-                <li><Link href="/#courses" className="text-sm text-muted hover:text-primary transition-colors">Courses</Link></li>
+                <li><Link href="/courses" className="text-sm text-muted hover:text-primary transition-colors">Courses</Link></li>
                 <li><Link href="/about" className="text-sm text-muted hover:text-primary transition-colors">About Us</Link></li>
               </ul>
             </div>

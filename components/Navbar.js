@@ -56,7 +56,7 @@ export default function Navbar() {
                 <span className="hidden md:inline">Home</span>
               </Link>
               <Link
-                href="/#courses"
+                href="/courses"
                 className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-muted transition-all hover:bg-muted/10 hover:text-foreground"
               >
                 <BookOpen className="size-4" />

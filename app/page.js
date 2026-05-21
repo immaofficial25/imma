@@ -1,13 +1,9 @@
 "use client";
 
-import CourseCard from "@/components/CourseCard";
-import { getCourses } from "@/lib/courses";
 import { motion } from "framer-motion";
 import { ArrowRight, GraduationCap, Target, Lightbulb, Monitor, Users, CheckCircle, ShieldCheck, MessageCircle, Globe, Newspaper, Heart, Map } from "lucide-react";
 
 export default function Home() {
-  const courses = getCourses();
-
   const curriculumFeatures = [
     {
       title: "Spoken English",
@@ -130,7 +126,7 @@ export default function Home() {
             className="flex flex-wrap items-center justify-center gap-4 mt-4"
           >
             <a
-              href="#courses"
+              href="/courses"
               className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-hover hover:scale-105 active:scale-95"
             >
               Browse Classes
@@ -227,22 +223,6 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Courses Section */}
-        <section id="courses" className="scroll-mt-32 space-y-10 pt-10">
-          <div className="flex items-end justify-between border-b border-border pb-6">
-            <div className="space-y-1">
-              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Available Classes</h2>
-              <p className="text-muted font-medium">Select your grade to see tailored curriculum</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.map((course, index) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
           </div>
         </section>
 

@@ -260,7 +260,7 @@ export default async function AdminPage({ searchParams }) {
                           {stats?.uniqueStudents ?? 0}
                         </td>
                         <td className="px-5 py-4 text-foreground/80">
-                          INR {stats?.revenue ?? 0}
+                          ₹{stats?.revenue ?? 0}
                         </td>
                         <td className="px-5 py-4">
                           <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-semibold text-muted">
@@ -386,7 +386,7 @@ export default async function AdminPage({ searchParams }) {
                           </div>
                         </td>
                         <td className="px-5 py-4 text-foreground/80">
-                          INR {payment.amount}
+                          ₹{payment.amount}
                         </td>
                         <td className="px-5 py-4">
                           <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-semibold text-muted">

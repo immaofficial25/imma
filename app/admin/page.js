@@ -19,6 +19,10 @@ export default async function AdminPage({ searchParams }) {
   const status = typeof sp.status === "string" ? sp.status : "";
   const courseId = typeof sp.courseId === "string" ? sp.courseId : "";
   const queryText = typeof sp.q === "string" ? sp.q.trim() : "";
+  
+  const page = parseInt(sp.page, 10) || 1;
+  const limit = 10;
+  const skip = (page - 1) * limit;
 
   const filter = {};
   if (status === "pending" || status === "completed" || status === "failed") {
@@ -46,8 +50,9 @@ export default async function AdminPage({ searchParams }) {
     failedCount,
     marketers,
     marketerStats,
+    totalPayments,
   ] = await Promise.all([
-    Payment.find(filter).sort({ createdAt: -1 }).limit(200).lean(),
+    Payment.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
     Payment.countDocuments({ status: "pending" }),
     Payment.countDocuments({ status: "completed" }),
     Payment.countDocuments({ status: "failed" }),
@@ -77,7 +82,18 @@ export default async function AdminPage({ searchParams }) {
       },
       { $sort: { enrollments: -1 } },
     ]),
+    Payment.countDocuments(filter),
   ]);
+
+  const totalPages = Math.ceil(totalPayments / limit);
+  const buildPaginationLink = (p) => {
+    const params = new URLSearchParams();
+    if (status) params.set("status", status);
+    if (courseId) params.set("courseId", courseId);
+    if (queryText) params.set("q", queryText);
+    params.set("page", String(p));
+    return `?${params.toString()}`;
+  };
 
   const courses = getCourses();
   const marketerStatsById = new Map(
@@ -453,6 +469,40 @@ export default async function AdminPage({ searchParams }) {
               </tbody>
             </table>
           </div>
+          
+          {totalPayments > 0 && (
+            <div className="flex items-center justify-between border-t border-border px-5 py-4">
+              <div className="text-sm text-muted">
+                Showing <span className="font-medium text-foreground">{skip + 1}</span> to <span className="font-medium text-foreground">{Math.min(skip + limit, totalPayments)}</span> of <span className="font-medium text-foreground">{totalPayments}</span> results
+              </div>
+              <div className="flex items-center gap-2">
+                {page > 1 ? (
+                  <a
+                    href={buildPaginationLink(page - 1)}
+                    className="inline-flex h-8 items-center justify-center rounded-lg border border-border bg-background px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted/10"
+                  >
+                    Previous
+                  </a>
+                ) : (
+                  <button disabled className="inline-flex h-8 items-center justify-center rounded-lg border border-border/50 bg-background/50 px-3 text-sm font-medium text-muted cursor-not-allowed">
+                    Previous
+                  </button>
+                )}
+                {page < totalPages ? (
+                  <a
+                    href={buildPaginationLink(page + 1)}
+                    className="inline-flex h-8 items-center justify-center rounded-lg border border-border bg-background px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted/10"
+                  >
+                    Next
+                  </a>
+                ) : (
+                  <button disabled className="inline-flex h-8 items-center justify-center rounded-lg border border-border/50 bg-background/50 px-3 text-sm font-medium text-muted cursor-not-allowed">
+                    Next
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
         </section>
       </main>
     </div>

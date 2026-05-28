@@ -63,13 +63,13 @@ export default function Footer() {
               Empowering students from Class 4 to 8 with high-quality, structured learning materials and expert guidance for a brighter academic future.
             </p>
             <div className="flex gap-4">
-              <a href="https://www.facebook.com/share/1cYs75PRN7/" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-muted transition-all hover:bg-primary/10 hover:text-primary ring-1 ring-border">
+              <a href="https://www.facebook.com/share/1cYs75PRN7/" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-[#1877F2] transition-all hover:bg-[#1877F2]/10 ring-1 ring-border hover:ring-[#1877F2]/50 hover:scale-110">
                 <FacebookIcon className="size-4" />
               </a>
-              <a href="https://www.instagram.com/imma.academy.official_?igsh=MTk5dTViNnJ5MGRlMg==" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-muted transition-all hover:bg-primary/10 hover:text-primary ring-1 ring-border">
+              <a href="https://www.instagram.com/imma.academy.official_?igsh=MTk5dTViNnJ5MGRlMg==" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-[#E4405F] transition-all hover:bg-[#E4405F]/10 ring-1 ring-border hover:ring-[#E4405F]/50 hover:scale-110">
                 <InstagramIcon className="size-4" />
               </a>
-              <a href="https://www.youtube.com/@imma2025" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-muted transition-all hover:bg-primary/10 hover:text-primary ring-1 ring-border">
+              <a href="https://www.youtube.com/@imma2025" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-[#FF0000] transition-all hover:bg-[#FF0000]/10 ring-1 ring-border hover:ring-[#FF0000]/50 hover:scale-110">
                 <YoutubeIcon className="size-4" />
               </a>
             </div>
@@ -123,7 +123,7 @@ export default function Footer() {
             <div className="h-4 w-px bg-border" />
             <Link
               href="/marketer/login"
-              className="text-xs font-bold text-muted hover:text-primary transition-colors"
+              className="rounded-full bg-primary/10 px-4 py-2 text-xs font-bold text-primary ring-1 ring-primary/30 transition-all hover:scale-105 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/30"
             >
               Marketer Dashboard
             </Link>

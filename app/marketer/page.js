@@ -201,21 +201,21 @@ export default async function MarketerDashboardPage({ searchParams }) {
         </header>
 
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-sm font-medium text-muted">Enrollments</p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
+          <div className="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-blue-600">Enrollments</p>
+            <p className="mt-2 text-2xl font-semibold text-blue-700">
               {summary?.enrollments ?? 0}
             </p>
           </div>
-          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-sm font-medium text-muted">Unique Students</p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
+          <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-indigo-600">Unique Students</p>
+            <p className="mt-2 text-2xl font-semibold text-indigo-700">
               {summary?.uniqueStudents ?? 0}
             </p>
           </div>
-          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-sm font-medium text-muted">Revenue</p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-emerald-600">Revenue</p>
+            <p className="mt-2 text-2xl font-semibold text-emerald-700">
               ₹{summary?.revenue ?? 0}
             </p>
           </div>
@@ -233,21 +233,21 @@ export default async function MarketerDashboardPage({ searchParams }) {
             </div>
 
             <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-border bg-background p-5">
-                <p className="text-sm font-medium text-muted">Enrollments</p>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
+              <div className="rounded-2xl border border-blue-500/20 bg-blue-500/5 p-5">
+                <p className="text-sm font-medium text-blue-600">Enrollments</p>
+                <p className="mt-2 text-2xl font-semibold text-blue-700">
                   {monthSummary?.enrollments ?? 0}
                 </p>
               </div>
-              <div className="rounded-2xl border border-border bg-background p-5">
-                <p className="text-sm font-medium text-muted">Unique Students</p>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
+              <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-5">
+                <p className="text-sm font-medium text-indigo-600">Unique Students</p>
+                <p className="mt-2 text-2xl font-semibold text-indigo-700">
                   {monthSummary?.uniqueStudents ?? 0}
                 </p>
               </div>
-              <div className="rounded-2xl border border-border bg-background p-5">
-                <p className="text-sm font-medium text-muted">Revenue</p>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
+              <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+                <p className="text-sm font-medium text-emerald-600">Revenue</p>
+                <p className="mt-2 text-2xl font-semibold text-emerald-700">
                   ₹{monthSummary?.revenue ?? 0}
                 </p>
               </div>

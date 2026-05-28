@@ -114,21 +114,21 @@ export default async function AdminPage({ searchParams }) {
         </header>
 
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-sm font-medium text-muted">Pending</p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
+          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-amber-600">Pending</p>
+            <p className="mt-2 text-2xl font-semibold text-amber-700">
               {pendingCount}
             </p>
           </div>
-          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-sm font-medium text-muted">Completed</p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-emerald-600">Completed</p>
+            <p className="mt-2 text-2xl font-semibold text-emerald-700">
               {completedCount}
             </p>
           </div>
-          <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-sm font-medium text-muted">Failed</p>
-            <p className="mt-2 text-2xl font-semibold text-foreground">
+          <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-rose-600">Failed</p>
+            <p className="mt-2 text-2xl font-semibold text-rose-700">
               {failedCount}
             </p>
           </div>

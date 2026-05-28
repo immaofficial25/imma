@@ -232,7 +232,7 @@ export default async function AdminPage({ searchParams }) {
         <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-background text-xs font-semibold uppercase tracking-wide text-muted">
+              <thead className="bg-indigo-50/50 text-xs font-semibold uppercase tracking-wide text-indigo-700 border-b border-indigo-100">
                 <tr>
                   <th className="px-5 py-3">Marketer</th>
                   <th className="px-5 py-3">Enrollments</th>
@@ -269,22 +269,30 @@ export default async function AdminPage({ searchParams }) {
                             </span>
                           </div>
                         </td>
-                        <td className="px-5 py-4 text-foreground/80">
+                        <td className="px-5 py-4 font-semibold text-blue-600">
                           {stats?.enrollments ?? 0}
                         </td>
-                        <td className="px-5 py-4 text-foreground/80">
+                        <td className="px-5 py-4 font-semibold text-indigo-600">
                           {stats?.uniqueStudents ?? 0}
                         </td>
-                        <td className="px-5 py-4 text-foreground/80">
+                        <td className="px-5 py-4 font-semibold text-emerald-600">
                           ₹{stats?.revenue ?? 0}
                         </td>
                         <td className="px-5 py-4">
-                          <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-semibold text-muted">
+                          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                            marketer.passwordHash
+                              ? "bg-emerald-100 text-emerald-700"
+                              : "bg-rose-100 text-rose-700"
+                          }`}>
                             {marketer.passwordHash ? "set" : "not set"}
                           </span>
                         </td>
                         <td className="px-5 py-4">
-                          <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-semibold text-muted">
+                          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                            marketer.isActive
+                              ? "bg-emerald-100 text-emerald-700"
+                              : "bg-rose-100 text-rose-700"
+                          }`}>
                             {marketer.isActive ? "active" : "inactive"}
                           </span>
                         </td>
@@ -354,7 +362,7 @@ export default async function AdminPage({ searchParams }) {
         <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-background text-xs font-semibold uppercase tracking-wide text-muted">
+              <thead className="bg-primary/5 text-xs font-semibold uppercase tracking-wide text-primary border-b border-primary/10">
                 <tr>
                   <th className="px-5 py-3">Created</th>
                   <th className="px-5 py-3">User</th>
@@ -401,11 +409,17 @@ export default async function AdminPage({ searchParams }) {
                             <span className="text-muted">{payment.courseId}</span>
                           </div>
                         </td>
-                        <td className="px-5 py-4 text-foreground/80">
+                        <td className="px-5 py-4 font-semibold text-emerald-600">
                           ₹{payment.amount}
                         </td>
                         <td className="px-5 py-4">
-                          <span className="rounded-full bg-muted/10 px-3 py-1 text-xs font-semibold text-muted">
+                          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                            payment.status === "completed"
+                              ? "bg-emerald-100 text-emerald-700"
+                              : payment.status === "pending"
+                              ? "bg-amber-100 text-amber-700"
+                              : "bg-rose-100 text-rose-700"
+                          }`}>
                             {payment.status}
                           </span>
                         </td>

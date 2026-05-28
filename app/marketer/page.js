@@ -266,7 +266,7 @@ export default async function MarketerDashboardPage({ searchParams }) {
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-background text-xs font-semibold uppercase tracking-wide text-muted">
+              <thead className="bg-indigo-50/50 text-xs font-semibold uppercase tracking-wide text-indigo-700 border-b border-indigo-100">
                 <tr>
                   <th className="px-5 py-3">Month</th>
                   <th className="px-5 py-3">Enrollments</th>
@@ -299,11 +299,11 @@ export default async function MarketerDashboardPage({ searchParams }) {
                             {label}
                           </Link>
                         </td>
-                        <td className="px-5 py-4 text-foreground/80">{row.enrollments}</td>
-                        <td className="px-5 py-4 text-foreground/80">
+                        <td className="px-5 py-4 font-semibold text-blue-600">{row.enrollments}</td>
+                        <td className="px-5 py-4 font-semibold text-indigo-600">
                           {row.uniqueStudents}
                         </td>
-                        <td className="px-5 py-4 text-foreground/80">
+                        <td className="px-5 py-4 font-semibold text-emerald-600">
                           ₹{row.revenue}
                         </td>
                       </tr>
@@ -328,7 +328,7 @@ export default async function MarketerDashboardPage({ searchParams }) {
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-background text-xs font-semibold uppercase tracking-wide text-muted">
+              <thead className="bg-primary/5 text-xs font-semibold uppercase tracking-wide text-primary border-b border-primary/10">
                 <tr>
                   <th className="px-5 py-3">Created</th>
                   <th className="px-5 py-3">Student</th>
@@ -353,9 +353,13 @@ export default async function MarketerDashboardPage({ searchParams }) {
                     return (
                       <tr key={payment._id}>
                         <td className="px-5 py-4 text-muted">{createdAt}</td>
-                        <td className="px-5 py-4 text-foreground/80">{payment.email}</td>
-                        <td className="px-5 py-4 text-foreground/80">{payment.courseId}</td>
-                        <td className="px-5 py-4 text-foreground/80">
+                        <td className="px-5 py-4 font-medium text-foreground">{payment.email}</td>
+                        <td className="px-5 py-4">
+                          <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+                            {payment.courseId}
+                          </span>
+                        </td>
+                        <td className="px-5 py-4 font-semibold text-emerald-600">
                           ₹{payment.amount}
                         </td>
                         <td className="px-5 py-4 font-mono text-xs text-muted">

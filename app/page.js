@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -88,13 +89,13 @@ export default function Home() {
             </p>
 
             <div className="mt-10">
-              <a
+              <Link
                 href="/courses"
                 className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-sm font-bold text-white shadow-lg transition-all hover:scale-105"
               >
                 Browse Courses
                 <ArrowRight className="ml-2 size-4" />
-              </a>
+              </Link>
             </div>
           </motion.div>
         </section>
@@ -179,7 +180,7 @@ export default function Home() {
             </div>
 
             <p className="mb-6 text-muted">
-              We believe parents are important partners in every child's
+              We believe parents are important partners in every child&apos;s
               success.
             </p>
 
@@ -196,13 +197,13 @@ export default function Home() {
 
         {/* COURSE PAGE BUTTON */}
         <section className="flex justify-center">
-          <a
+          <Link
             href="/courses"
             className="inline-flex items-center justify-center rounded-full bg-primary px-10 py-4 text-base font-bold text-white shadow-lg transition-all hover:scale-105 hover:bg-primary/90"
           >
             Go To Course Page
             <ArrowRight className="ml-2 size-5" />
-          </a>
+          </Link>
         </section>
 
       </main>

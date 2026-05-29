@@ -1,13 +1,13 @@
 import React from "react";
-import { 
-  Rocket, 
-  Target, 
-  Users, 
-  CheckCircle, 
-  BookOpen, 
-  Monitor, 
-  ShieldCheck, 
-  Heart 
+import {
+  Rocket,
+  Target,
+  Users,
+  CheckCircle,
+  BookOpen,
+  Monitor,
+  ShieldCheck,
+  Heart
 } from "lucide-react";
 import Link from "next/link";
 
@@ -37,7 +37,7 @@ export default function AboutPage() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Academy Pvt. Ltd.</span>
           </h1>
           <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed">
-            A modern online learning platform dedicated to developing students beyond traditional education. 
+            A modern online learning platform dedicated to developing students beyond traditional education.
             We prepare the next generation for real-world challenges through skill-based learning.
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function AboutPage() {
             </div>
             <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
             <p className="text-muted leading-relaxed">
-              To build confident, skilled, and responsible individuals through affordable and accessible education. 
+              To build confident, skilled, and responsible individuals through affordable and accessible education.
               We believe that every child deserves the opportunity to excel, regardless of their location.
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function AboutPage() {
             </div>
             <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
             <p className="text-muted leading-relaxed">
-              Developing students beyond traditional textbooks. We focus on practical knowledge, life skills, 
+              Developing students beyond traditional textbooks. We focus on practical knowledge, life skills,
               and personality development to ensure our students are ready for the future.
             </p>
           </div>
@@ -71,30 +71,30 @@ export default function AboutPage() {
         <div className="mb-32">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Why Choose IMMA?</h2>
-            <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
+            {/* <div className="h-1 w-20 bg-primary mx-auto rounded-full" /> */}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { 
-                icon: <Monitor className="size-6" />, 
-                title: "100% Online", 
-                desc: "Learn from the comfort of your home with interactive digital classes." 
+              {
+                icon: <Monitor className="size-6" />,
+                title: "100% Online",
+                desc: "Learn from the comfort of your home with interactive digital classes."
               },
-              { 
-                icon: <BookOpen className="size-6" />, 
-                title: "Skill-Based", 
-                desc: "Focused on developing real-world skills like soft skills and AI learning." 
+              {
+                icon: <BookOpen className="size-6" />,
+                title: "Skill-Based",
+                desc: "Focused on developing real-world skills like soft skills and AI learning."
               },
-              { 
-                icon: <Heart className="size-6" />, 
-                title: "Affordable", 
-                desc: "High-quality education made accessible to every family." 
+              {
+                icon: <Heart className="size-6" />,
+                title: "Affordable",
+                desc: "High-quality education made accessible to every family."
               },
-              { 
-                icon: <CheckCircle className="size-6" />, 
-                title: "Career-Oriented", 
-                desc: "Programs designed to build a strong foundation for future careers." 
+              {
+                icon: <CheckCircle className="size-6" />,
+                title: "Career-Oriented",
+                desc: "Programs designed to build a strong foundation for future careers."
               }
             ].map((feature, i) => (
               <div key={i} className="p-6 rounded-2xl bg-surface/50 border border-border hover:bg-surface transition-colors text-center">
@@ -113,7 +113,7 @@ export default function AboutPage() {
           <div className="relative z-10">
             <h2 className="text-3xl font-bold mb-6">Designed for Young Achievers</h2>
             <p className="text-lg text-muted max-w-2xl mx-auto mb-8">
-              Specially curated programs for students from <span className="text-foreground font-bold underline decoration-primary">Class 4 to 8</span>. 
+              Specially curated programs for students from <span className="text-foreground font-bold  decoration-primary">Class 4 to 8</span>.
               We bridge the gap between school curriculum and modern life requirements.
             </p>
             <div className="inline-flex gap-4">
@@ -143,7 +143,7 @@ export default function AboutPage() {
             <div className="hidden sm:block w-px h-12 bg-border" />
             <div className="flex flex-col items-center">
               <span className="text-xs font-bold uppercase tracking-widest text-muted mb-2">Email Address</span>
-              <a href="mailto:imma.official25@gmail.com" className="text-xl font-bold text-accent hover:underline">imma.official25@gmail.com</a>
+              <a href="mailto:imma.academy2025@gmail.com" className="text-xl font-bold text-accent hover:underline">imma.academy2025@gmail.com</a>
             </div>
             <div className="hidden lg:block w-px h-12 bg-border" />
             <div className="flex flex-col items-center">

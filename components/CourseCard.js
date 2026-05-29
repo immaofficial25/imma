@@ -36,7 +36,11 @@ export default function CourseCard({ course }) {
                   </p>
                 )}
               </div>
-              {course.price && (
+              {course.isEnrolled ? (
+                <div className="shrink-0 rounded-xl bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-500 ring-1 ring-emerald-500/20">
+                  Enrolled
+                </div>
+              ) : course.price && (
                 <div className="shrink-0 rounded-xl bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary ring-1 ring-primary/20">
                   {course.price}
                 </div>

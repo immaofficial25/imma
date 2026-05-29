@@ -1,5 +1,9 @@
 import CourseCard from "@/components/CourseCard";
 import { getCourses } from "@/lib/courses";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { connectDB } from "@/lib/mongodb";
+import Payment from "@/models/Payment";
 
 import {
   MessageCircle,
@@ -16,8 +20,20 @@ export const metadata = {
   description: "Browse available classes at Indian Mind Meld Academy.",
 };
 
-export default function CoursesPage() {
+export default async function CoursesPage() {
   const courses = getCourses();
+  let enrolledCourseIds = [];
+
+  const session = await getServerSession(authOptions);
+  if (session?.user?.id) {
+    await connectDB();
+    const payments = await Payment.find({
+      userId: session.user.id,
+      status: "completed",
+    }).select("courseId").lean();
+
+    enrolledCourseIds = payments.map(p => p.courseId);
+  }
 
   const curriculumFeatures = [
     {
@@ -141,9 +157,10 @@ export default function CoursesPage() {
           </header>
 
           <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
+            {courses.map((course) => {
+              const isEnrolled = enrolledCourseIds.includes(course.id);
+              return <CourseCard key={course.id} course={{ ...course, isEnrolled }} />;
+            })}
           </section>
         </section>
       </main>

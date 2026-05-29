@@ -118,8 +118,19 @@ export default function Footer() {
             &copy; {currentYear} IMMA Courses. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-xs text-muted/60 hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="text-xs text-muted/60 hover:text-primary transition-colors">Terms of Service</Link>
+            <Link
+              href="/privacy"
+              className="text-sm font-bold text-black hover:text-primary transition-colors"
+            >
+              Privacy Policy
+            </Link>
+
+            <Link
+              href="/terms"
+              className="text-sm font-bold text-black hover:text-primary transition-colors"
+            >
+              Terms of Service
+            </Link>
             <div className="h-4 w-px bg-border" />
             <Link
               href="/marketer/login"

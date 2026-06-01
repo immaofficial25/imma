@@ -19,7 +19,7 @@ export default async function AdminPage({ searchParams }) {
   const status = typeof sp.status === "string" ? sp.status : "";
   const courseId = typeof sp.courseId === "string" ? sp.courseId : "";
   const queryText = typeof sp.q === "string" ? sp.q.trim() : "";
-  
+
   const page = parseInt(sp.page, 10) || 1;
   const limit = 10;
   const skip = (page - 1) * limit;
@@ -106,7 +106,7 @@ export default async function AdminPage({ searchParams }) {
         <header className="flex flex-col gap-2">
           <p className="text-sm font-medium text-muted">Admin</p>
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Payments Dashboard
+            Admin Dashboard
           </h1>
           <p className="text-base text-muted">
             Signed in as {session.user.email}
@@ -279,20 +279,21 @@ export default async function AdminPage({ searchParams }) {
                           ₹{stats?.revenue ?? 0}
                         </td>
                         <td className="px-5 py-4">
-                          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                            marketer.passwordHash
-                              ? "bg-emerald-100 text-emerald-700"
-                              : "bg-rose-100 text-rose-700"
-                          }`}>
-                            {marketer.passwordHash ? "set" : "not set"}
-                          </span>
+                          {marketer.passwordHash ? (
+                            <span className="rounded-full px-3 py-1 text-xs font-semibold bg-emerald-100 text-emerald-700">
+                              {marketer.passwordHash}
+                            </span>
+                          ) : (
+                            <span className="rounded-full px-3 py-1 text-xs font-semibold bg-rose-100 text-rose-700">
+                              not set
+                            </span>
+                          )}
                         </td>
                         <td className="px-5 py-4">
-                          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                            marketer.isActive
-                              ? "bg-emerald-100 text-emerald-700"
-                              : "bg-rose-100 text-rose-700"
-                          }`}>
+                          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${marketer.isActive
+                            ? "bg-emerald-100 text-emerald-700"
+                            : "bg-rose-100 text-rose-700"
+                            }`}>
                             {marketer.isActive ? "active" : "inactive"}
                           </span>
                         </td>
@@ -413,13 +414,12 @@ export default async function AdminPage({ searchParams }) {
                           ₹{payment.amount}
                         </td>
                         <td className="px-5 py-4">
-                          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                            payment.status === "completed"
-                              ? "bg-emerald-100 text-emerald-700"
-                              : payment.status === "pending"
+                          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${payment.status === "completed"
+                            ? "bg-emerald-100 text-emerald-700"
+                            : payment.status === "pending"
                               ? "bg-amber-100 text-amber-700"
                               : "bg-rose-100 text-rose-700"
-                          }`}>
+                            }`}>
                             {payment.status}
                           </span>
                         </td>
@@ -483,7 +483,7 @@ export default async function AdminPage({ searchParams }) {
               </tbody>
             </table>
           </div>
-          
+
           {totalPayments > 0 && (
             <div className="flex items-center justify-between border-t border-border px-5 py-4">
               <div className="text-sm text-muted">

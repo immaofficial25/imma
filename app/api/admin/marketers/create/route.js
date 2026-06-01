@@ -41,7 +41,7 @@ export async function POST(request) {
   await connectDB();
 
   try {
-    const passwordHash = await hashMarketerPassword(password);
+    const passwordHash = password;
     await Marketer.create({
       marketerId,
       passwordHash,

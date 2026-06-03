@@ -67,7 +67,6 @@ export async function POST(req) {
       receipt: `receipt_${Date.now()}`,
     });
 
-    // Save pending payment to DB
     await connectDB();
     const referralNumber =
       typeof referralNumberRaw === "string" && referralNumberRaw.trim()
@@ -76,15 +75,15 @@ export async function POST(req) {
     await Payment.create({
       userId: session.user.id,
       email: session.user.email,
-      name: name,
+      name,
       phoneNumber: phone,
-      courseId: courseId,
+      courseId,
       razorpayOrderId: order.id,
       amount: amountRupees,
       currency: "INR",
       status: "pending",
       receipt: order.receipt,
-      referralNumber: referralNumber,
+      referralNumber,
     });
 
     return NextResponse.json(order);

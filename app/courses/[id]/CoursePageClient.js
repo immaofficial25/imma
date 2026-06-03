@@ -14,6 +14,7 @@ import {
   ShieldCheck, 
   ChevronRight,
   Info
+import classLinks from '@/app/courses/data/classLinks';
 } from "lucide-react";
 import ContinueWithGoogleButton from "@/components/ContinueWithGoogleButton";
 
@@ -61,6 +62,12 @@ export default function CoursePageClient({ course, hasPurchased }) {
   const { data: session, status } = useSession();
   const [showFlow, setShowFlow] = useState(false);
   const [isPaying, setIsPaying] = useState(false);
+  const [language, setLanguage] = useState('bengali');
+  const [links, setLinks] = useState(classLinks[language] ?? []);
+
+  useEffect(() => {
+    setLinks(classLinks[language] ?? []);
+  }, [language]);
 
   useEffect(() => {
     if (showFlow) {
@@ -204,6 +211,35 @@ export default function CoursePageClient({ course, hasPurchased }) {
           {/* Main Content */}
           <div className="lg:col-span-7 space-y-10">
             <header className="space-y-4">
+              <div className="flex items-center gap-4 mb-4">
+                <label htmlFor="language-select" className="text-sm font-medium text-muted">Language</label>
+                <select
+                  id="language-select"
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  className="rounded-md border border-border bg-background px-2 py-1 text-foreground focus:border-primary focus:outline-none"
+                >
+                  <option value="bengali">Bengali</option>
+                  <option value="odia">Odia</option>
+                  <option value="hindi">Hindi</option>
+                </select>
+              </div>
+
+              {links.length > 0 && (
+                <section className="mt-6">
+                  <h2 className="text-xl font-bold text-foreground mb-2">Class Links ({language.charAt(0).toUpperCase() + language.slice(1)})</h2>
+                  <ul className="list-disc list-inside space-y-1">
+                    {links.map((item, idx) => (
+                      <li key={idx}>
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                          {item.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
               <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
                 {course.title}
               </h1>

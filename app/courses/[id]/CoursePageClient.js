@@ -1,23 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { signIn, useSession } from "next-auth/react";
-import { motion, AnimatePresence } from "framer-motion";
-import { 
-  ArrowLeft, 
-  CheckCircle2, 
-  CreditCard, 
-  X, 
-  Phone, 
-  User, 
-  ShieldCheck, 
+import {
+  ArrowLeft,
+  CheckCircle2,
+  CreditCard,
+  X,
+  Phone,
+  User,
+  ShieldCheck,
   ChevronRight,
   Info
-import classLinks from '@/app/courses/data/classLinks';
 } from "lucide-react";
-import ContinueWithGoogleButton from "@/components/ContinueWithGoogleButton";
 
+import classLinks from "@/app/courses/data/classLinks";
+import ContinueWithGoogleButton from "@/components/ContinueWithGoogleButton";
 function loadRazorpayScript() {
   return new Promise((resolve) => {
     if (typeof window !== "undefined" && window.Razorpay) {
@@ -199,8 +195,8 @@ export default function CoursePageClient({ course, hasPurchased }) {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
 
       <main className="relative mx-auto w-full max-w-4xl px-6 py-12 lg:py-20">
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-primary transition-colors group"
         >
           <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
@@ -257,7 +253,7 @@ export default function CoursePageClient({ course, hasPurchased }) {
                   What you&apos;ll learn
                 </h2>
               </div>
-              
+
               {Array.isArray(course.features) && course.features.length > 0 ? (
                 <ul className="grid grid-cols-1 gap-4">
                   {course.features.map((feature) => (
@@ -333,7 +329,7 @@ export default function CoursePageClient({ course, hasPurchased }) {
                 onClick={() => setShowFlow(false)}
                 className="absolute inset-0 bg-background/80 backdrop-blur-xl"
               />
-              
+
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}

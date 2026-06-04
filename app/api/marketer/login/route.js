@@ -4,7 +4,7 @@ import Marketer from "@/models/Marketer";
 import {
   createMarketerSessionToken,
   setMarketerAuthCookie,
-  verifyMarketerPassword,
+  comparePlainPassword,
 } from "@/lib/marketer-auth";
 
 export const runtime = "nodejs";
@@ -33,7 +33,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
 
-  const ok = await verifyMarketerPassword(password, marketer.passwordHash);
+  const ok = await comparePlainPassword(password, marketer.passwordHash);
   if (!ok) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }

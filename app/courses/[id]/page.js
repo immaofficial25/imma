@@ -1,3 +1,7 @@
+import { notFound, redirect } from "next/navigation";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
+import { getCourseById } from "@/lib/courses";
 import { canAccessCourse } from "@/lib/course-access";
 
 export default async function CoursePage({ params }) {

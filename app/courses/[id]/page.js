@@ -1,13 +1,4 @@
-import { notFound, redirect } from "next/navigation";
-import { getCourseById, getCourses } from "@/lib/courses";
-import CoursePageClient from "./CoursePageClient";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/lib/auth";
-import { hasCompletedCoursePayment } from "@/lib/course-access";
-
-export async function generateStaticParams() {
-  return getCourses().map((course) => ({ id: course.id }));
-}
+import { canAccessCourse } from "@/lib/course-access";
 
 export default async function CoursePage({ params }) {
   const { id } = await params;
@@ -18,7 +9,7 @@ export default async function CoursePage({ params }) {
   }
 
   const session = await getServerSession(authOptions);
-  const hasPurchased = await hasCompletedCoursePayment({
+  const hasPurchased = await canAccessCourse({
     userId: session?.user?.id,
     courseId: id,
   });

@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { getCourseById } from "@/lib/courses";
 import { canAccessCourse } from "@/lib/course-access";
 
+import CoursePageClient from "@/app/courses/[id]/CoursePageClient";
 export default async function CoursePage({ params }) {
   const { id } = await params;
   const course = getCourseById(id);

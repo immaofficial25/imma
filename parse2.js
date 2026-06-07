@@ -4,7 +4,7 @@ const data = `Class 4 Soft skills 1st Class Sunday (7AM-8AM) meet.google.com/bqm
 
 const classes = data.split(/Class \d+ Soft skills /).filter(Boolean);
 
-const coursesFile = 'data/courses.json';
+const coursesFile = 'data/bengalicourse.json';
 const courses = JSON.parse(fs.readFileSync(coursesFile, 'utf8'));
 
 classes.forEach((classData, idx) => {
@@ -26,4 +26,4 @@ classes.forEach((classData, idx) => {
 });
 
 fs.writeFileSync(coursesFile, JSON.stringify(courses, null, 2));
-console.log("Updated data/courses.json");
+console.log("Updated data/bengalicourse.json");

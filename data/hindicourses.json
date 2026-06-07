@@ -1,0 +1,428 @@
+[
+    {
+        "id": "hindi-class-4",
+        "title": "Class 4",
+        "subtitle": "Hindi Language - Soft skills",
+        "price": "₹450",
+        "features": [
+            "Live classes",
+            "Hindi language learning",
+            "Interactive sessions"
+        ],
+        "resources": {
+            "meetLink": "",
+            "videos": [],
+            "pdfs": [],
+            "liveClasses": [
+                {
+                    "class_no": 1,
+                    "day": "Sunday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 2,
+                    "day": "Monday",
+                    "time": "8AM-9AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 3,
+                    "day": "Saturday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 4,
+                    "day": "Wednesday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 5,
+                    "day": "Thursday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 6,
+                    "day": "Friday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 7,
+                    "day": "Sunday",
+                    "time": "10AM-11AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 8,
+                    "day": "Monday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 9,
+                    "day": "Wednesday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 10,
+                    "day": "Thursday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                }
+            ]
+        }
+    },
+    {
+        "id": "hindi-class-5",
+        "title": "Class 5",
+        "subtitle": "Hindi Language - Soft skills",
+        "price": "₹450",
+        "features": [
+            "Live classes",
+            "Hindi language learning",
+            "Interactive sessions"
+        ],
+        "resources": {
+            "meetLink": "",
+            "videos": [],
+            "pdfs": [],
+            "liveClasses": [
+                {
+                    "class_no": 1,
+                    "day": "Sunday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 2,
+                    "day": "Monday",
+                    "time": "8AM-9AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 3,
+                    "day": "Saturday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 4,
+                    "day": "Wednesday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 5,
+                    "day": "Thursday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 6,
+                    "day": "Friday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 7,
+                    "day": "Sunday",
+                    "time": "10AM-11AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 8,
+                    "day": "Monday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 9,
+                    "day": "Wednesday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 10,
+                    "day": "Thursday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                }
+            ]
+        }
+    },
+    {
+        "id": "hindi-class-6",
+        "title": "Class 6",
+        "subtitle": "Hindi Language - Soft skills",
+        "price": "₹450",
+        "features": [
+            "Live classes",
+            "Hindi language learning",
+            "Interactive sessions"
+        ],
+        "resources": {
+            "meetLink": "",
+            "videos": [],
+            "pdfs": [],
+            "liveClasses": [
+                {
+                    "class_no": 1,
+                    "day": "Sunday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 2,
+                    "day": "Monday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 3,
+                    "day": "Wednesday",
+                    "time": "8AM-9AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 4,
+                    "day": "Thursday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 5,
+                    "day": "Friday",
+                    "time": "8AM-9AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 6,
+                    "day": "Saturday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 7,
+                    "day": "Sunday",
+                    "time": "8AM-9AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 8,
+                    "day": "Monday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 9,
+                    "day": "Wednesday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 10,
+                    "day": "Friday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 11,
+                    "day": "Saturday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 12,
+                    "day": "Saturday",
+                    "time": "4PM-5PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                }
+            ]
+        }
+    },
+    {
+        "id": "hindi-class-7",
+        "title": "Class 7",
+        "subtitle": "Hindi Language - Soft skills",
+        "price": "₹450",
+        "features": [
+            "Live classes",
+            "Hindi language learning",
+            "Interactive sessions"
+        ],
+        "resources": {
+            "meetLink": "",
+            "videos": [],
+            "pdfs": [],
+            "liveClasses": [
+                {
+                    "class_no": 1,
+                    "day": "Sunday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 2,
+                    "day": "Monday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 3,
+                    "day": "Wednesday",
+                    "time": "8AM-9AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 4,
+                    "day": "Thursday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 5,
+                    "day": "Friday",
+                    "time": "8AM-9AM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 6,
+                    "day": "Saturday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 7,
+                    "day": "Sunday",
+                    "time": "8AM-9AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 8,
+                    "day": "Monday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 9,
+                    "day": "Wednesday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 10,
+                    "day": "Friday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 11,
+                    "day": "Saturday",
+                    "time": "7AM-8AM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 12,
+                    "day": "Saturday",
+                    "time": "4PM-5PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                }
+            ]
+        }
+    },
+    {
+        "id": "hindi-class-8",
+        "title": "Class 8",
+        "subtitle": "Hindi Language - Soft skills",
+        "price": "₹450",
+        "features": [
+            "Live classes",
+            "Hindi language learning",
+            "Interactive sessions"
+        ],
+        "resources": {
+            "meetLink": "",
+            "videos": [],
+            "pdfs": [],
+            "liveClasses": [
+                {
+                    "class_no": 1,
+                    "day": "Sunday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 2,
+                    "day": "Monday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 3,
+                    "day": "Thursday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 4,
+                    "day": "Sunday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 5,
+                    "day": "Wednesday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 6,
+                    "day": "Friday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 7,
+                    "day": "Sunday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 8,
+                    "day": "Friday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 9,
+                    "day": "Monday",
+                    "time": "6PM-7PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 10,
+                    "day": "Wednesday",
+                    "time": "5PM-6PM",
+                    "meet_link": "https://meet.google.com/bdi-jtrk-xbq"
+                },
+                {
+                    "class_no": 11,
+                    "day": "Thursday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                },
+                {
+                    "class_no": 12,
+                    "day": "Sunday",
+                    "time": "7PM-8PM",
+                    "meet_link": "https://meet.google.com/bmv-riwk-ugy"
+                }
+            ]
+        }
+    }
+]

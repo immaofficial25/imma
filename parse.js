@@ -4,8 +4,8 @@ const data = `Class 4 Soft skills 1st Class Sunday (7AM-8AM) meet.google.com/bqm
 
 const classes = data.split(/Class \d+ Soft skills /).filter(Boolean);
 
-// courses.json is already classes 4 to 8. So indices 0 to 4 correspond to Class 4 to Class 8.
-const coursesFile = 'data/courses.json';
+// bengalicourse.json is already classes 4 to 8. So indices 0 to 4 correspond to Class 4 to Class 8.
+const coursesFile = 'data/bengalicourse.json';
 const courses = JSON.parse(fs.readFileSync(coursesFile, 'utf8'));
 
 classes.forEach((classData, idx) => {
@@ -26,4 +26,4 @@ classes.forEach((classData, idx) => {
 });
 
 fs.writeFileSync(coursesFile, JSON.stringify(courses, null, 2));
-console.log("Updated data/courses.json");
+console.log("Updated data/bengalicourse.json");

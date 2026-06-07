@@ -4,6 +4,7 @@ import Payment from "@/models/Payment";
 import { getAdminSession } from "@/lib/admin";
 import Marketer from "@/models/Marketer";
 import { getCourseById, getCourses } from "@/lib/courses";
+import Link from "next/link";
 
 function escapeRegex(input) {
   return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -103,14 +104,24 @@ export default async function AdminPage({ searchParams }) {
   return (
     <div className="flex flex-1 flex-col bg-background font-sans">
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-6 py-14 sm:px-10">
-        <header className="flex flex-col gap-2">
-          <p className="text-sm font-medium text-muted">Admin</p>
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Admin Dashboard
-          </h1>
-          <p className="text-base text-muted">
-            Signed in as {session.user.email}
-          </p>
+        <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium text-muted">Admin</p>
+            <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Admin Dashboard
+            </h1>
+            <p className="text-base text-muted">
+              Signed in as {session.user.email}
+            </p>
+          </div>
+          <div className="flex items-center">
+            <Link 
+              href="/admin/grants" 
+              className="inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all active:scale-95"
+            >
+              Grant Course Access
+            </Link>
+          </div>
         </header>
 
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">

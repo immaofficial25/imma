@@ -7,6 +7,8 @@ export default function GrantAccessForm() {
   const [courseId, setCourseId] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState(null);
 
   async function handleSubmit(e) {
@@ -25,6 +27,8 @@ export default function GrantAccessForm() {
         body: JSON.stringify({
           email,
           courseId,
+          name,
+          phoneNumber,
         }),
       });
 
@@ -37,6 +41,8 @@ export default function GrantAccessForm() {
       setMessage("Course access granted successfully.");
       setEmail("");
       setCourseId("");
+      setName("");
+      setPhoneNumber("");
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {
@@ -58,6 +64,38 @@ export default function GrantAccessForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="student@example.com"
+          className="h-12 w-full rounded-xl border-2 border-slate-200 bg-white px-4 text-sm text-slate-900 shadow-sm transition-all outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+        />
+      </div>
+
+      {/* Name */}
+      <div>
+        <label className="mb-2 block text-sm font-semibold text-slate-700">
+          Student Name
+        </label>
+
+        <input
+          type="text"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="John Doe"
+          className="h-12 w-full rounded-xl border-2 border-slate-200 bg-white px-4 text-sm text-slate-900 shadow-sm transition-all outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+        />
+      </div>
+
+      {/* Phone Number */}
+      <div>
+        <label className="mb-2 block text-sm font-semibold text-slate-700">
+          Phone Number
+        </label>
+
+        <input
+          type="tel"
+          required
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          placeholder="9876543210"
           className="h-12 w-full rounded-xl border-2 border-slate-200 bg-white px-4 text-sm text-slate-900 shadow-sm transition-all outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
         />
       </div>

@@ -7,11 +7,11 @@ export async function POST(req) {
   const session = await getAdminSession();
   if (!session) return new NextResponse('Unauthorized', { status: 401 });
 
-  const { email, courseId } = await req.json();
+  const { email, courseId, name, phoneNumber } = await req.json();
   const adminId = session.user.id;
 
   try {
-    const grant = await grantCourseAccess({ email, courseId, adminId });
+    const grant = await grantCourseAccess({ email, courseId, name, phoneNumber, adminId });
     return NextResponse.json({ success: true, grant });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 400 });

@@ -2,9 +2,11 @@ import "server-only";
 import { redirect } from "next/navigation";
 import { getAdminSession } from "@/lib/admin";
 import GrantAccessForm from "./GrantAccessForm";
+import { getCourses } from "@/lib/courses";
 
 export default async function GrantsPage() {
   const session = await getAdminSession();
+  const courses = getCourses();
 
   if (!session) {
     redirect("/");
@@ -73,7 +75,7 @@ export default async function GrantsPage() {
           </div>
 
           <div className="p-6">
-            <GrantAccessForm />
+            <GrantAccessForm courses={courses} />
           </div>
         </div>
 

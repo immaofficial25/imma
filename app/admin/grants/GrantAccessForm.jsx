@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function GrantAccessForm() {
+export default function GrantAccessForm({ courses = [] }) {
   const [email, setEmail] = useState("");
   const [courseId, setCourseId] = useState("");
   const [loading, setLoading] = useState(false);
@@ -100,20 +100,25 @@ export default function GrantAccessForm() {
         />
       </div>
 
-      {/* Course ID */}
+      {/* Course */}
       <div>
         <label className="mb-2 block text-sm font-semibold text-slate-700">
-          Course ID
+          Course
         </label>
 
-        <input
-          type="text"
+        <select
           required
           value={courseId}
           onChange={(e) => setCourseId(e.target.value)}
-          placeholder="e.g. ai-masterclass"
-          className="h-12 w-full rounded-xl border-2 border-slate-200 bg-white px-4 text-sm text-slate-900 shadow-sm transition-all outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-        />
+          className="h-12 w-full rounded-xl border-2 border-slate-200 bg-white px-4 text-sm text-slate-900 shadow-sm transition-all outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 appearance-none"
+        >
+          <option value="" disabled>Select a course</option>
+          {courses.map((course) => (
+            <option key={course.id} value={course.id}>
+              {course.title} ({course.id})
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Success Message */}

@@ -5,6 +5,7 @@ import { getAdminSession } from "@/lib/admin";
 import Marketer from "@/models/Marketer";
 import { getCourseById, getCourses } from "@/lib/courses";
 import Link from "next/link";
+import PasswordInput from "@/components/PasswordInput";
 
 function escapeRegex(input) {
   return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -269,11 +270,9 @@ export default async function AdminPage({ searchParams }) {
               <label className="text-sm font-semibold text-foreground">
                 Password
               </label>
-              <input
-                type="password"
+              <PasswordInput
                 name="password"
                 placeholder="At least 6 characters"
-                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 required
               />
             </div>

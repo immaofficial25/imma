@@ -20,6 +20,8 @@ export default async function AdminPage({ searchParams }) {
   const status = typeof sp.status === "string" ? sp.status : "";
   const courseId = typeof sp.courseId === "string" ? sp.courseId : "";
   const queryText = typeof sp.q === "string" ? sp.q.trim() : "";
+  const fromDate = typeof sp.from === "string" ? sp.from : "";
+  const toDate = typeof sp.to === "string" ? sp.to : "";
 
   const page = parseInt(sp.page, 10) || 1;
   const limit = 10;
@@ -41,6 +43,15 @@ export default async function AdminPage({ searchParams }) {
       { razorpayOrderId: { $regex: safe, $options: "i" } },
     ];
   }
+  if (fromDate || toDate) {
+    filter.createdAt = {};
+    if (fromDate) filter.createdAt.$gte = new Date(fromDate);
+    if (toDate) {
+      const to = new Date(toDate);
+      to.setHours(23, 59, 59, 999);
+      filter.createdAt.$lte = to;
+    }
+  }
 
   await connectDB();
 
@@ -50,6 +61,39 @@ export default async function AdminPage({ searchParams }) {
   startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const startOfYear = new Date(now.getFullYear(), 0, 1);
+
+  const facetObj = {
+    today: [
+      { $match: { createdAt: { $gte: startOfDay } } },
+      { $group: { _id: null, total: { $sum: "$amount" } } }
+    ],
+    thisWeek: [
+      { $match: { createdAt: { $gte: startOfWeek } } },
+      { $group: { _id: null, total: { $sum: "$amount" } } }
+    ],
+    thisMonth: [
+      { $match: { createdAt: { $gte: startOfMonth } } },
+      { $group: { _id: null, total: { $sum: "$amount" } } }
+    ],
+    thisYear: [
+      { $match: { createdAt: { $gte: startOfYear } } },
+      { $group: { _id: null, total: { $sum: "$amount" } } }
+    ]
+  };
+
+  if (fromDate || toDate) {
+    const customMatch = {};
+    if (fromDate) customMatch.$gte = new Date(fromDate);
+    if (toDate) {
+      const to = new Date(toDate);
+      to.setHours(23, 59, 59, 999);
+      customMatch.$lte = to;
+    }
+    facetObj.custom = [
+      { $match: { createdAt: customMatch } },
+      { $group: { _id: null, total: { $sum: "$amount" } } }
+    ];
+  }
 
   const [
     payments,
@@ -61,26 +105,7 @@ export default async function AdminPage({ searchParams }) {
     Payment.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
     Payment.aggregate([
       { $match: { status: "completed" } },
-      {
-        $facet: {
-          today: [
-            { $match: { createdAt: { $gte: startOfDay } } },
-            { $group: { _id: null, total: { $sum: "$amount" } } }
-          ],
-          thisWeek: [
-            { $match: { createdAt: { $gte: startOfWeek } } },
-            { $group: { _id: null, total: { $sum: "$amount" } } }
-          ],
-          thisMonth: [
-            { $match: { createdAt: { $gte: startOfMonth } } },
-            { $group: { _id: null, total: { $sum: "$amount" } } }
-          ],
-          thisYear: [
-            { $match: { createdAt: { $gte: startOfYear } } },
-            { $group: { _id: null, total: { $sum: "$amount" } } }
-          ]
-        }
-      }
+      { $facet: facetObj }
     ]),
     Marketer.find({}).sort({ createdAt: -1 }).select("+passwordHash").lean(),
     Payment.aggregate([
@@ -123,6 +148,8 @@ export default async function AdminPage({ searchParams }) {
     if (status) params.set("status", status);
     if (courseId) params.set("courseId", courseId);
     if (queryText) params.set("q", queryText);
+    if (fromDate) params.set("from", fromDate);
+    if (toDate) params.set("to", toDate);
     params.set("page", String(p));
     return `?${params.toString()}`;
   };
@@ -155,7 +182,7 @@ export default async function AdminPage({ searchParams }) {
           </div>
         </header>
 
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+        <section className={`grid grid-cols-1 gap-4 ${(fromDate || toDate) ? "sm:grid-cols-5" : "sm:grid-cols-4"}`}>
           <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-5 shadow-sm">
             <p className="text-sm font-medium text-indigo-600">Today</p>
             <p className="mt-2 text-2xl font-semibold text-indigo-700">
@@ -180,6 +207,14 @@ export default async function AdminPage({ searchParams }) {
               ₹{yearTotal.toLocaleString("en-IN")}
             </p>
           </div>
+          {(fromDate || toDate) && (
+            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5 shadow-sm">
+              <p className="text-sm font-medium text-amber-600">Custom Range</p>
+              <p className="mt-2 text-2xl font-semibold text-amber-700">
+                ₹{(revenueStats.custom?.[0]?.total || 0).toLocaleString("en-IN")}
+              </p>
+            </div>
+          )}
         </section>
 
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
@@ -356,8 +391,8 @@ export default async function AdminPage({ searchParams }) {
         </section>
 
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
-          <form className="grid grid-cols-1 gap-4 sm:grid-cols-4" method="get">
-            <div className="flex flex-col gap-1.5">
+          <form className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-6" method="get">
+            <div className="flex flex-col gap-1.5 lg:col-span-2">
               <label className="text-sm font-semibold text-foreground">Search</label>
               <input
                 name="q"
@@ -397,12 +432,32 @@ export default async function AdminPage({ searchParams }) {
               </select>
             </div>
 
-            <div className="flex items-end">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-semibold text-foreground">From Date</label>
+              <input
+                type="date"
+                name="from"
+                defaultValue={fromDate}
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-semibold text-foreground">To Date</label>
+              <input
+                type="date"
+                name="to"
+                defaultValue={toDate}
+                className="h-11 rounded-xl border border-border bg-background px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
+
+            <div className="flex items-end lg:col-span-6">
               <button
                 type="submit"
-                className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all active:scale-95"
+                className="inline-flex h-11 w-full sm:w-auto items-center justify-center rounded-xl bg-primary px-8 text-sm font-semibold text-white hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all active:scale-95"
               >
-                Apply
+                Apply Filters
               </button>
             </div>
           </form>

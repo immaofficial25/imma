@@ -44,19 +44,44 @@ export default async function AdminPage({ searchParams }) {
 
   await connectDB();
 
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startOfWeek = new Date(startOfDay);
+  startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const startOfYear = new Date(now.getFullYear(), 0, 1);
+
   const [
     payments,
-    pendingCount,
-    completedCount,
-    failedCount,
+    revenueStatsData,
     marketers,
     marketerStats,
     totalPayments,
   ] = await Promise.all([
     Payment.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
-    Payment.countDocuments({ status: "pending" }),
-    Payment.countDocuments({ status: "completed" }),
-    Payment.countDocuments({ status: "failed" }),
+    Payment.aggregate([
+      { $match: { status: "completed" } },
+      {
+        $facet: {
+          today: [
+            { $match: { createdAt: { $gte: startOfDay } } },
+            { $group: { _id: null, total: { $sum: "$amount" } } }
+          ],
+          thisWeek: [
+            { $match: { createdAt: { $gte: startOfWeek } } },
+            { $group: { _id: null, total: { $sum: "$amount" } } }
+          ],
+          thisMonth: [
+            { $match: { createdAt: { $gte: startOfMonth } } },
+            { $group: { _id: null, total: { $sum: "$amount" } } }
+          ],
+          thisYear: [
+            { $match: { createdAt: { $gte: startOfYear } } },
+            { $group: { _id: null, total: { $sum: "$amount" } } }
+          ]
+        }
+      }
+    ]),
     Marketer.find({}).sort({ createdAt: -1 }).select("+passwordHash").lean(),
     Payment.aggregate([
       {
@@ -85,6 +110,12 @@ export default async function AdminPage({ searchParams }) {
     ]),
     Payment.countDocuments(filter),
   ]);
+
+  const revenueStats = revenueStatsData[0] || {};
+  const todayTotal = revenueStats.today?.[0]?.total || 0;
+  const weekTotal = revenueStats.thisWeek?.[0]?.total || 0;
+  const monthTotal = revenueStats.thisMonth?.[0]?.total || 0;
+  const yearTotal = revenueStats.thisYear?.[0]?.total || 0;
 
   const totalPages = Math.ceil(totalPayments / limit);
   const buildPaginationLink = (p) => {
@@ -124,23 +155,29 @@ export default async function AdminPage({ searchParams }) {
           </div>
         </header>
 
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5 shadow-sm">
-            <p className="text-sm font-medium text-amber-600">Pending</p>
-            <p className="mt-2 text-2xl font-semibold text-amber-700">
-              {pendingCount}
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+          <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-indigo-600">Today</p>
+            <p className="mt-2 text-2xl font-semibold text-indigo-700">
+              ₹{todayTotal.toLocaleString("en-IN")}
+            </p>
+          </div>
+          <div className="rounded-2xl border border-sky-500/20 bg-sky-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-sky-600">This Week</p>
+            <p className="mt-2 text-2xl font-semibold text-sky-700">
+              ₹{weekTotal.toLocaleString("en-IN")}
             </p>
           </div>
           <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5 shadow-sm">
-            <p className="text-sm font-medium text-emerald-600">Completed</p>
+            <p className="text-sm font-medium text-emerald-600">This Month</p>
             <p className="mt-2 text-2xl font-semibold text-emerald-700">
-              {completedCount}
+              ₹{monthTotal.toLocaleString("en-IN")}
             </p>
           </div>
-          <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 p-5 shadow-sm">
-            <p className="text-sm font-medium text-rose-600">Failed</p>
-            <p className="mt-2 text-2xl font-semibold text-rose-700">
-              {failedCount}
+          <div className="rounded-2xl border border-fuchsia-500/20 bg-fuchsia-500/10 p-5 shadow-sm">
+            <p className="text-sm font-medium text-fuchsia-600">This Year</p>
+            <p className="mt-2 text-2xl font-semibold text-fuchsia-700">
+              ₹{yearTotal.toLocaleString("en-IN")}
             </p>
           </div>
         </section>

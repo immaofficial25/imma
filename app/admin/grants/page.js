@@ -40,7 +40,7 @@ export default async function GrantsPage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="mb-8 grid gap-4 md:grid-cols-3">
+        <div className="mb-8 grid gap-4 md:grid-cols-4">
           <div className="rounded-2xl border bg-card p-5">
             <p className="text-sm text-muted-foreground">Access Type</p>
             <p className="mt-2 text-lg font-semibold">Manual Grant</p>
@@ -54,6 +54,12 @@ export default async function GrantsPage() {
           <div className="rounded-2xl border bg-card p-5">
             <p className="text-sm text-muted-foreground">Access Status</p>
             <p className="mt-2 text-lg font-semibold">Permanent</p>
+          </div>
+
+          <div className="rounded-2xl border border-indigo-200 bg-indigo-50 p-5">
+            <p className="text-sm text-indigo-600 font-medium">Admin Referrals</p>
+            <p className="mt-2 text-3xl font-bold text-indigo-700">{adminPayments.length}</p>
+            <p className="mt-1 text-xs text-indigo-500">students via &quot;admin&quot; code</p>
           </div>
         </div>
 

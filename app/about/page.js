@@ -117,14 +117,14 @@ export default function AboutPage() {
               We bridge the gap between school curriculum and modern life requirements.
             </p>
             <div className="inline-flex gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm">
+              {/* <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm">
                 <ShieldCheck className="size-4 text-green-400" />
                 <span>Cyber Safety Aware</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm">
                 <ShieldCheck className="size-4 text-blue-400" />
                 <span>Personality Focused</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

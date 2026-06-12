@@ -251,9 +251,19 @@ export default function CoursePageClient({ course, hasPurchased }) {
           <div className="lg:col-span-5">
             <div className="sticky top-32 overflow-hidden rounded-2xl bg-surface border border-border shadow-premium">
               <div className="p-8 space-y-8">
-                <div className="flex items-baseline justify-between">
+                <div className="flex flex-col gap-2">
                   <span className="text-sm font-bold text-muted uppercase tracking-widest">Price</span>
-                  <span className="text-4xl font-black text-foreground">{course.price}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-lg bg-sky-50 px-3 py-1 text-3xl font-extrabold text-sky-600">
+                      {course.price}
+                    </span>
+                    <span className="text-lg font-medium text-gray-400 line-through">
+                      ₹1200
+                    </span>
+                    <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-600">
+                      63% OFF
+                    </span>
+                  </div>
                 </div>
 
                 {hasPurchased ? (

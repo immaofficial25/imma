@@ -41,8 +41,11 @@ export default function CourseCard({ course }) {
                   Enrolled
                 </div>
               ) : course.price && (
-                <div className="shrink-0 rounded-xl bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary ring-1 ring-primary/20">
-                  {course.price}
+                <div className="flex shrink-0 items-center gap-2">
+                  <div className="rounded-xl bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary ring-1 ring-primary/20">
+                    {course.price}
+                  </div>
+                  <span className="text-xs font-medium text-muted line-through">₹1200</span>
                 </div>
               )}
             </div>

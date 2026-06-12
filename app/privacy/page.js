@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, Shield, Phone, MapPin } from "lucide-react";
+import { Shield } from "lucide-react";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -182,7 +182,7 @@ export default function PrivacyPolicyPage() {
                 With permission, we may use student photographs, classroom videos, and achievement media for:
               </p>
               <div className="flex flex-wrap gap-2">
-                {[ "Website", "Social Media", "Brochures", "Advertisements" ].map((item) => (
+                {["Website", "Social Media", "Brochures", "Advertisements"].map((item) => (
                   <span key={item} className="rounded-full bg-muted/10 px-4 py-1.5 text-xs font-bold text-muted ring-1 ring-border">
                     {item}
                   </span>
@@ -226,63 +226,6 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
           </div>
-
-          {/* Section 12 - Contact */}
-          <section className="mt-16 rounded-3xl bg-surface border border-border p-10 shadow-sm overflow-hidden relative">
-            <div className="absolute top-0 right-0 size-32 bg-accent/5 blur-3xl rounded-full -mr-16 -mt-16" />
-            <div className="relative space-y-8">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold text-foreground">12. Contact Information</h2>
-                <p className="text-muted">For privacy-related questions or concerns, please reach out.</p>
-              </div>
-              
-              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <div className="space-y-6">
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-accent">Direct Contact</h3>
-                  <div className="space-y-4">
-                    <div className="flex gap-4 items-center">
-                      <div className="flex size-10 items-center justify-center rounded-full bg-accent/10 text-accent">
-                        <Mail className="size-5" />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-xs font-semibold text-muted">Email</span>
-                        <a href="mailto:imma.official25@gmail.com" className="text-sm font-bold text-foreground hover:text-accent transition-colors">
-                          imma.official25@gmail.com
-                        </a>
-                      </div>
-                    </div>
-                    <div className="flex gap-4 items-center">
-                      <div className="flex size-10 items-center justify-center rounded-full bg-accent/10 text-accent">
-                        <Phone className="size-5" />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-xs font-semibold text-muted">WhatsApp / Call</span>
-                        <a href="tel:+918967576097" className="text-sm font-bold text-foreground hover:text-accent transition-colors">
-                          +91-8967576097
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-accent">Academy Address</h3>
-                  <div className="flex gap-4 items-start">
-                    <div className="flex size-10 items-center justify-center rounded-full bg-accent/10 text-accent shrink-0">
-                      <MapPin className="size-5" />
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-bold text-foreground">Indian Mind Meld Academy Pvt. Ltd.</span>
-                      <p className="text-sm text-muted leading-relaxed">
-                        Haldia, Purba Medinipur,<br />
-                        West Bengal - 721654
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
 
         <footer className="mt-20 border-t border-border pt-10 text-center">

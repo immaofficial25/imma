@@ -5,23 +5,19 @@ import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 // Brand icons as SVGs since lucide-react removed them in v1.0
-const TwitterIcon = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
-
 const InstagramIcon = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-  </svg>
-);
-
-const GithubIcon = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
   </svg>
 );
 
@@ -41,11 +37,11 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-10 border-t border-border bg-sky-100/40 backdrop-blur-md pt-20 pb-10">
+    <footer className="relative z-10 border-t border-white/20 bg-sky-900 text-slate-200 pt-20 pb-10">
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
           {/* Brand Column */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="space-y-6 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5">
               <Image
                 src="/footer_logo.png"
@@ -53,59 +49,144 @@ export default function Footer() {
                 width={200}
                 height={200}
                 className="object-contain drop-shadow-lg"
-                style={{ width: '200px', height: 'auto' }}
+                style={{ width: "200px", height: "auto" }}
               />
-              {/* <span className="text-xl font-bold tracking-tight text-foreground">
-                IMMA <span className="text-primary">Courses</span>
-              </span> */}
             </Link>
-            <p className="text-sm leading-relaxed text-muted max-w-xs break-words">
-              Empowering students from Class 4 to 8 with high-quality, structured learning materials and expert guidance for a brighter academic future.
+
+            <p className="max-w-xs break-words text-sm leading-relaxed text-slate-200">
+              Empowering students from Class 4 to 8 with high-quality,
+              structured learning materials and expert guidance for a brighter
+              academic future.
             </p>
+
             <div className="flex gap-4">
-              <a href="https://www.facebook.com/share/1cYs75PRN7/" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-[#1877F2] transition-all hover:bg-[#1877F2]/10 ring-1 ring-border hover:ring-[#1877F2]/50 hover:scale-110">
+              <a
+                href="https://www.facebook.com/share/1cYs75PRN7/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-9 items-center justify-center rounded-full bg-white/10 text-[#1877F2] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#1877F2]/10 hover:ring-[#1877F2]/50"
+              >
                 <FacebookIcon className="size-4" />
               </a>
-              <a href="https://www.instagram.com/imma.academy.official_?igsh=MTk5dTViNnJ5MGRlMg==" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-[#E4405F] transition-all hover:bg-[#E4405F]/10 ring-1 ring-border hover:ring-[#E4405F]/50 hover:scale-110">
+
+              <a
+                href="https://www.instagram.com/imma.academy.official_?igsh=MTk5dTViNnJ5MGRlMg=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-9 items-center justify-center rounded-full bg-white/10 text-[#E4405F] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#E4405F]/10 hover:ring-[#E4405F]/50"
+              >
                 <InstagramIcon className="size-4" />
               </a>
-              <a href="https://www.youtube.com/@imma2025" target="_blank" rel="noopener noreferrer" className="flex size-9 items-center justify-center rounded-full bg-muted/10 text-[#FF0000] transition-all hover:bg-[#FF0000]/10 ring-1 ring-border hover:ring-[#FF0000]/50 hover:scale-110">
+
+              <a
+                href="https://www.youtube.com/@imma2025"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-9 items-center justify-center rounded-full bg-white/10 text-[#FF0000] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#FF0000]/10 hover:ring-[#FF0000]/50"
+              >
                 <YoutubeIcon className="size-4" />
               </a>
             </div>
           </div>
 
           {/* Links Columns */}
-          <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:col-span-3">
+            {/* Platform */}
             <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">Platform</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Platform
+              </h3>
+
               <ul className="space-y-3">
-                <li><Link href="/" className="text-sm text-muted hover:text-primary transition-colors">Home</Link></li>
-                <li><Link href="/courses" className="text-sm text-muted hover:text-primary transition-colors">Courses</Link></li>
-                <li><Link href="/about" className="text-sm text-muted hover:text-primary transition-colors">About Us</Link></li>
+                <li>
+                  <Link
+                    href="/"
+                    className="text-sm text-slate-200 transition-colors hover:text-white"
+                  >
+                    Home
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/courses"
+                    className="text-sm text-slate-200 transition-colors hover:text-white"
+                  >
+                    Courses
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/about"
+                    className="text-sm text-slate-200 transition-colors hover:text-white"
+                  >
+                    About Us
+                  </Link>
+                </li>
               </ul>
             </div>
+
+            {/* Support */}
             <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">Support</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Support
+              </h3>
+
               <ul className="space-y-3">
-                <li><Link href="/contact" className="text-sm text-muted hover:text-primary transition-colors">Contact</Link></li>
-                <li><Link href="/help" className="text-sm text-muted hover:text-primary transition-colors">Help Center</Link></li>
-                <li><Link href="/faq" className="text-sm text-muted hover:text-primary transition-colors">FAQ</Link></li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-sm text-slate-200 transition-colors hover:text-white"
+                  >
+                    Contact
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/help"
+                    className="text-sm text-slate-200 transition-colors hover:text-white"
+                  >
+                    Help Center
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/faq"
+                    className="text-sm text-slate-200 transition-colors hover:text-white"
+                  >
+                    FAQ
+                  </Link>
+                </li>
               </ul>
             </div>
+
+            {/* Contact */}
             <div className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">Contact</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                Contact
+              </h3>
+
               <ul className="space-y-3">
-                <li className="flex gap-3 items-start text-sm text-muted">
-                  <MapPin className="size-4 shrink-0 text-primary mt-0.5" />
-                  <span className="break-words max-w-full">INDIAN MIND MELD ACADEMY Pvt. Ltd., Haldia, Purba Medinipur, West Bengal - 721654</span>
+                <li className="flex items-start gap-3 text-sm text-slate-200">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-sky-300" />
+                  <span className="break-words">
+                    INDIAN MIND MELD ACADEMY Pvt. Ltd., Haldia, Purba Medinipur,
+                    West Bengal - 721654
+                  </span>
                 </li>
-                <li className="flex gap-3 items-center text-sm text-muted">
-                  <Mail className="size-4 shrink-0 text-primary" />
-                  <span className="break-words max-w-full">imma.academy2025@gmail.com</span>
+
+                <li className="flex items-center gap-3 text-sm text-slate-200">
+                  <Mail className="size-4 shrink-0 text-sky-300" />
+                  <span className="break-words">
+                    imma.academy2025@gmail.com
+                  </span>
                 </li>
-                <li className="flex gap-3 items-center text-sm text-muted">
-                  <Phone className="size-4 shrink-0 text-primary" />
+
+                <li className="flex items-center gap-3 text-sm text-slate-200">
+                  <Phone className="size-4 shrink-0 text-sky-300" />
                   <span>+91 89675 76097</span>
                 </li>
               </ul>
@@ -113,28 +194,32 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-border pt-10 sm:flex-row">
-          <p className="text-xs text-muted/60">
+        {/* Bottom Bar */}
+        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-white/20 pt-10 sm:flex-row">
+          <p className="text-xs text-slate-300">
             &copy; {currentYear} IMMA Courses. All rights reserved.
           </p>
+
           <div className="flex items-center gap-6">
             <Link
               href="/privacy"
-              className="text-sm font-bold text-black hover:text-primary transition-colors"
+              className="text-sm font-semibold text-white transition-colors hover:text-slate-300"
             >
               Privacy Policy
             </Link>
 
             <Link
               href="/terms"
-              className="text-sm font-bold text-black hover:text-primary transition-colors"
+              className="text-sm font-semibold text-white transition-colors hover:text-slate-300"
             >
               Terms of Service
             </Link>
-            <div className="h-4 w-px bg-border" />
+
+            <div className="h-4 w-px bg-white/20" />
+
             <Link
               href="/marketer/login"
-              className="rounded-full bg-primary/10 px-4 py-2 text-xs font-bold text-primary ring-1 ring-primary/30 transition-all hover:scale-105 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/30"
+              className="rounded-full bg-sky-500 px-4 py-2 text-xs font-bold text-white transition-all hover:scale-105 hover:bg-sky-400 hover:shadow-lg"
             >
               Marketer Dashboard
             </Link>

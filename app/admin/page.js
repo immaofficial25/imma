@@ -23,6 +23,7 @@ export default async function AdminPage({ searchParams }) {
   const queryText = typeof sp.q === "string" ? sp.q.trim() : "";
   const fromDate = typeof sp.from === "string" ? sp.from : "";
   const toDate = typeof sp.to === "string" ? sp.to : "";
+  const mq = typeof sp.mq === "string" ? sp.mq.trim() : "";
 
   const page = parseInt(sp.page, 10) || 1;
   const limit = 10;
@@ -108,7 +109,11 @@ export default async function AdminPage({ searchParams }) {
       { $match: { status: "completed" } },
       { $facet: facetObj }
     ]),
-    Marketer.find({}).sort({ createdAt: -1 }).select("+passwordHash").lean(),
+    Marketer.find(
+      mq
+        ? { marketerId: { $regex: escapeRegex(mq), $options: "i" } }
+        : {}
+    ).sort({ createdAt: -1 }).select("+passwordHash").lean(),
     Payment.aggregate([
       {
         $match: {
@@ -151,6 +156,7 @@ export default async function AdminPage({ searchParams }) {
     if (queryText) params.set("q", queryText);
     if (fromDate) params.set("from", fromDate);
     if (toDate) params.set("to", toDate);
+    if (mq) params.set("mq", mq);
     params.set("page", String(p));
     return `?${params.toString()}`;
   };
@@ -219,7 +225,7 @@ export default async function AdminPage({ searchParams }) {
         </section>
 
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-medium text-muted">Marketers</p>
               <h2 className="mt-1 text-xl font-semibold text-foreground">
@@ -229,6 +235,45 @@ export default async function AdminPage({ searchParams }) {
                 Enrollment counts are based on completed payments where Referral Number matches the marketer ID.
               </p>
             </div>
+            <form method="get" className="flex items-center gap-2">
+              {status && <input type="hidden" name="status" value={status} />}
+              {courseId && <input type="hidden" name="courseId" value={courseId} />}
+              {queryText && <input type="hidden" name="q" value={queryText} />}
+              {fromDate && <input type="hidden" name="from" value={fromDate} />}
+              {toDate && <input type="hidden" name="to" value={toDate} />}
+              <div className="relative">
+                <input
+                  name="mq"
+                  defaultValue={mq}
+                  placeholder="Search Marketer ID..."
+                  className="h-10 w-full sm:w-60 rounded-xl border border-border bg-background pl-4 pr-10 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+                {mq && (
+                  <a
+                    href={(() => {
+                      const params = new URLSearchParams();
+                      if (status) params.set("status", status);
+                      if (courseId) params.set("courseId", courseId);
+                      if (queryText) params.set("q", queryText);
+                      if (fromDate) params.set("from", fromDate);
+                      if (toDate) params.set("to", toDate);
+                      const qs = params.toString();
+                      return qs ? `?${qs}` : "?";
+                    })()}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground text-sm font-medium"
+                    title="Clear search"
+                  >
+                    ✕
+                  </a>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="inline-flex h-10 items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover shadow-lg shadow-primary/20 transition-all active:scale-95"
+              >
+                Search
+              </button>
+            </form>
           </div>
 
           <form
@@ -391,6 +436,7 @@ export default async function AdminPage({ searchParams }) {
 
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
           <form className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-6" method="get">
+            {mq && <input type="hidden" name="mq" value={mq} />}
             <div className="flex flex-col gap-1.5 lg:col-span-2">
               <label className="text-sm font-semibold text-foreground">Search</label>
               <input

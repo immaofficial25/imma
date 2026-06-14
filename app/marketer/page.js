@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { connectDB } from "@/lib/mongodb";
 import Payment from "@/models/Payment";
 import { getMarketerSessionFromCookies } from "@/lib/marketer-auth";
+import MarketerEarningsBreakdown from "@/components/MarketerEarningsBreakdown";
+import { Clock, Calendar, CalendarDays, CalendarRange, Award } from "lucide-react";
 
 function parseMonthInput(value) {
   if (typeof value !== "string") return null;
@@ -27,10 +29,33 @@ function parseMonthInput(value) {
 }
 
 function formatMonthLabel({ year, month }) {
-  return new Date(year, month - 1, 1).toLocaleString(undefined, {
+  return new Date(Date.UTC(year, month - 1, 1)).toLocaleString(undefined, {
     month: "long",
     year: "numeric",
+    timeZone: "UTC",
   });
+}
+
+function runStatsQuery(match, additionalMatch) {
+  return Payment.aggregate([
+    { $match: { ...match, ...additionalMatch } },
+    {
+      $group: {
+        _id: "$referralNumber",
+        enrollments: { $sum: 1 },
+        revenue: { $sum: "$amount" },
+        userIds: { $addToSet: "$userId" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        enrollments: 1,
+        revenue: 1,
+        uniqueStudents: { $size: "$userIds" },
+      },
+    },
+  ]);
 }
 
 export default async function MarketerDashboardPage({ searchParams }) {
@@ -56,53 +81,48 @@ export default async function MarketerDashboardPage({ searchParams }) {
       }
     : null;
 
-  const [stats, recentPayments, selectedMonthStats, monthBreakdown] = await Promise.all([
-    Payment.aggregate([
-      {
-        $match: match,
-      },
-      {
-        $group: {
-          _id: "$referralNumber",
-          enrollments: { $sum: 1 },
-          revenue: { $sum: "$amount" },
-          userIds: { $addToSet: "$userId" },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          enrollments: 1,
-          revenue: 1,
-          uniqueStudents: { $size: "$userIds" },
-        },
-      },
-    ]),
+  const now = new Date();
+
+  // Daily: Today start UTC
+  const utcTodayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+
+  // Weekly: Monday start UTC
+  const day = now.getUTCDay();
+  const diff = now.getUTCDate() - day + (day === 0 ? -6 : 1);
+  const utcWeekStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), diff));
+
+  // Monthly: Month start UTC
+  const utcMonthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+
+  // Yearly: Year start UTC
+  const utcYearStart = new Date(Date.UTC(now.getUTCFullYear(), 0, 1));
+
+  // Breakdown ranges
+  const sevenDaysAgo = new Date(utcTodayStart);
+  sevenDaysAgo.setUTCDate(sevenDaysAgo.getUTCDate() - 6);
+
+  const eightWeeksAgo = new Date(utcWeekStart);
+  eightWeeksAgo.setUTCDate(eightWeeksAgo.getUTCDate() - 7 * 7);
+
+  const [
+    stats,
+    recentPayments,
+    selectedMonthStats,
+    monthBreakdown,
+    dailyStats,
+    weeklyStats,
+    monthlyStats,
+    yearlyStats,
+    dailyBreakdown,
+    weeklyBreakdown,
+    yearlyBreakdown,
+  ] = await Promise.all([
+    runStatsQuery(match, {}),
     Payment.find(monthlyMatch ?? match)
       .sort({ createdAt: -1 })
       .limit(selectedMonth ? 200 : 50)
       .lean(),
-    monthlyMatch
-      ? Payment.aggregate([
-          { $match: monthlyMatch },
-          {
-            $group: {
-              _id: "$referralNumber",
-              enrollments: { $sum: 1 },
-              revenue: { $sum: "$amount" },
-              userIds: { $addToSet: "$userId" },
-            },
-          },
-          {
-            $project: {
-              _id: 0,
-              enrollments: 1,
-              revenue: 1,
-              uniqueStudents: { $size: "$userIds" },
-            },
-          },
-        ])
-      : Promise.resolve([]),
+    monthlyMatch ? runStatsQuery(monthlyMatch, {}) : Promise.resolve([]),
     Payment.aggregate([
       { $match: match },
       {
@@ -129,13 +149,94 @@ export default async function MarketerDashboardPage({ searchParams }) {
       { $sort: { year: -1, month: -1 } },
       { $limit: 12 },
     ]),
+    runStatsQuery(match, { createdAt: { $gte: utcTodayStart } }),
+    runStatsQuery(match, { createdAt: { $gte: utcWeekStart } }),
+    runStatsQuery(match, { createdAt: { $gte: utcMonthStart } }),
+    runStatsQuery(match, { createdAt: { $gte: utcYearStart } }),
+    Payment.aggregate([
+      { $match: { ...match, createdAt: { $gte: sevenDaysAgo } } },
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            month: { $month: "$createdAt" },
+            day: { $dayOfMonth: "$createdAt" },
+          },
+          enrollments: { $sum: 1 },
+          revenue: { $sum: "$amount" },
+          userIds: { $addToSet: "$userId" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          year: "$_id.year",
+          month: "$_id.month",
+          day: "$_id.day",
+          enrollments: 1,
+          revenue: 1,
+          uniqueStudents: { $size: "$userIds" },
+        },
+      },
+      { $sort: { year: -1, month: -1, day: -1 } },
+    ]),
+    Payment.aggregate([
+      { $match: { ...match, createdAt: { $gte: eightWeeksAgo } } },
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            week: { $week: "$createdAt" },
+          },
+          enrollments: { $sum: 1 },
+          revenue: { $sum: "$amount" },
+          userIds: { $addToSet: "$userId" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          year: "$_id.year",
+          week: "$_id.week",
+          enrollments: 1,
+          revenue: 1,
+          uniqueStudents: { $size: "$userIds" },
+        },
+      },
+      { $sort: { year: -1, week: -1 } },
+    ]),
+    Payment.aggregate([
+      { $match: match },
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+          },
+          enrollments: { $sum: 1 },
+          revenue: { $sum: "$amount" },
+          userIds: { $addToSet: "$userId" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          year: "$_id.year",
+          enrollments: 1,
+          revenue: 1,
+          uniqueStudents: { $size: "$userIds" },
+        },
+      },
+      { $sort: { year: -1 } },
+    ]),
   ]);
 
-  const summary = Array.isArray(stats) && stats.length > 0 ? stats[0] : null;
-  const monthSummary =
-    Array.isArray(selectedMonthStats) && selectedMonthStats.length > 0
-      ? selectedMonthStats[0]
-      : null;
+  const summary = stats[0] ?? null;
+  const monthSummary = selectedMonthStats[0] ?? null;
+  const todaySummary = dailyStats[0] ?? null;
+  const weekSummary = weeklyStats[0] ?? null;
+  const monthSummaryStats = monthlyStats[0] ?? null;
+  const yearSummary = yearlyStats[0] ?? null;
+
 
   return (
     <div className="flex flex-1 flex-col bg-background font-sans">
@@ -200,24 +301,80 @@ export default async function MarketerDashboardPage({ searchParams }) {
           </form>
         </header>
 
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-5 shadow-sm">
-            <p className="text-sm font-medium text-blue-600">Enrollments</p>
-            <p className="mt-2 text-2xl font-semibold text-blue-700">
-              {summary?.enrollments ?? 0}
-            </p>
+        <section className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+          {/* Today Card */}
+          <div className="rounded-2xl border border-blue-500/20 bg-blue-500/5 p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">Today</span>
+              <Clock className="h-4 w-4 text-blue-500" />
+            </div>
+            <div className="mt-4">
+              <span className="text-2xl font-bold text-foreground">₹{todaySummary?.revenue ?? 0}</span>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs font-medium text-muted border-t border-border/50 pt-2.5">
+              <span>{todaySummary?.enrollments ?? 0} enrolls</span>
+              <span>{todaySummary?.uniqueStudents ?? 0} students</span>
+            </div>
           </div>
-          <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-5 shadow-sm">
-            <p className="text-sm font-medium text-indigo-600">Unique Students</p>
-            <p className="mt-2 text-2xl font-semibold text-indigo-700">
-              {summary?.uniqueStudents ?? 0}
-            </p>
+
+          {/* Weekly Card */}
+          <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider">This Week</span>
+              <Calendar className="h-4 w-4 text-indigo-500" />
+            </div>
+            <div className="mt-4">
+              <span className="text-2xl font-bold text-foreground">₹{weekSummary?.revenue ?? 0}</span>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs font-medium text-muted border-t border-border/50 pt-2.5">
+              <span>{weekSummary?.enrollments ?? 0} enrolls</span>
+              <span>{weekSummary?.uniqueStudents ?? 0} students</span>
+            </div>
           </div>
-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5 shadow-sm">
-            <p className="text-sm font-medium text-emerald-600">Revenue</p>
-            <p className="mt-2 text-2xl font-semibold text-emerald-700">
-              ₹{summary?.revenue ?? 0}
-            </p>
+
+          {/* Monthly Card */}
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-emerald-600 uppercase tracking-wider">This Month</span>
+              <CalendarDays className="h-4 w-4 text-emerald-500" />
+            </div>
+            <div className="mt-4">
+              <span className="text-2xl font-bold text-foreground">₹{monthSummaryStats?.revenue ?? 0}</span>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs font-medium text-muted border-t border-border/50 pt-2.5">
+              <span>{monthSummaryStats?.enrollments ?? 0} enrolls</span>
+              <span>{monthSummaryStats?.uniqueStudents ?? 0} students</span>
+            </div>
+          </div>
+
+          {/* Yearly Card */}
+          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-amber-600 uppercase tracking-wider">This Year</span>
+              <CalendarRange className="h-4 w-4 text-amber-500" />
+            </div>
+            <div className="mt-4">
+              <span className="text-2xl font-bold text-foreground">₹{yearSummary?.revenue ?? 0}</span>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs font-medium text-muted border-t border-border/50 pt-2.5">
+              <span>{yearSummary?.enrollments ?? 0} enrolls</span>
+              <span>{yearSummary?.uniqueStudents ?? 0} students</span>
+            </div>
+          </div>
+
+          {/* Lifetime Card */}
+          <div className="rounded-2xl border border-purple-500/20 bg-purple-500/5 p-5 shadow-sm hover:shadow-md transition-shadow col-span-2 md:col-span-1">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-purple-600 uppercase tracking-wider">Lifetime</span>
+              <Award className="h-4 w-4 text-purple-500" />
+            </div>
+            <div className="mt-4">
+              <span className="text-2xl font-bold text-foreground">₹{summary?.revenue ?? 0}</span>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs font-medium text-muted border-t border-border/50 pt-2.5">
+              <span>{summary?.enrollments ?? 0} enrolls</span>
+              <span>{summary?.uniqueStudents ?? 0} students</span>
+            </div>
           </div>
         </section>
 
@@ -255,65 +412,12 @@ export default async function MarketerDashboardPage({ searchParams }) {
           </section>
         ) : null}
 
-        <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
-          <div className="px-6 py-5">
-            <h2 className="text-lg font-semibold text-foreground">
-              Last 12 months
-            </h2>
-            <p className="mt-1 text-sm text-muted">
-              Click a month to filter.
-            </p>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-left text-sm">
-              <thead className="bg-indigo-50/50 text-xs font-semibold uppercase tracking-wide text-indigo-700 border-b border-indigo-100">
-                <tr>
-                  <th className="px-5 py-3">Month</th>
-                  <th className="px-5 py-3">Enrollments</th>
-                  <th className="px-5 py-3">Unique Students</th>
-                  <th className="px-5 py-3">Revenue</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {monthBreakdown.length === 0 ? (
-                  <tr>
-                    <td className="px-5 py-6 text-muted" colSpan={4}>
-                      No enrollments yet.
-                    </td>
-                  </tr>
-                ) : (
-                  monthBreakdown.map((row) => {
-                    const monthValue = `${String(row.year)}-${String(row.month).padStart(
-                      2,
-                      "0"
-                    )}`;
-                    const label = formatMonthLabel(row);
-
-                    return (
-                      <tr key={monthValue}>
-                        <td className="px-5 py-4">
-                          <Link
-                            href={`/marketer?month=${encodeURIComponent(monthValue)}`}
-                            className="font-semibold text-foreground hover:underline"
-                          >
-                            {label}
-                          </Link>
-                        </td>
-                        <td className="px-5 py-4 font-semibold text-blue-600">{row.enrollments}</td>
-                        <td className="px-5 py-4 font-semibold text-indigo-600">
-                          {row.uniqueStudents}
-                        </td>
-                        <td className="px-5 py-4 font-semibold text-emerald-600">
-                          ₹{row.revenue}
-                        </td>
-                      </tr>
-                    );
-                  })
-                )}
-              </tbody>
-            </table>
-          </div>
-        </section>
+        <MarketerEarningsBreakdown
+          dailyBreakdown={dailyBreakdown}
+          weeklyBreakdown={weeklyBreakdown}
+          monthlyBreakdown={monthBreakdown}
+          yearlyBreakdown={yearlyBreakdown}
+        />
 
         <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <div className="px-6 py-5">

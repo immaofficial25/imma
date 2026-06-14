@@ -36,3 +36,23 @@ body {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-container {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: marquee 50s linear infinite;
+}
+
+.marquee-container:hover {
+  animation-play-state: paused;
+}

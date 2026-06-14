@@ -64,7 +64,7 @@ export default function Footer() {
                 href="https://www.facebook.com/share/1cYs75PRN7/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-9 items-center justify-center rounded-full bg-white/10 text-[#1877F2] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#1877F2]/10 hover:ring-[#1877F2]/50"
+                className="flex size-9 items-center justify-center rounded-full bg-white text-[#1877F2] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#1877F2]/10 hover:ring-[#1877F2]/50"
               >
                 <FacebookIcon className="size-4" />
               </a>
@@ -73,7 +73,7 @@ export default function Footer() {
                 href="https://www.instagram.com/imma.academy.official_?igsh=MTk5dTViNnJ5MGRlMg=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-9 items-center justify-center rounded-full bg-white/10 text-[#E4405F] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#E4405F]/10 hover:ring-[#E4405F]/50"
+                className="flex size-9 items-center justify-center rounded-full bg-white text-[#E4405F] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#E4405F]/10 hover:ring-[#E4405F]/50"
               >
                 <InstagramIcon className="size-4" />
               </a>
@@ -82,7 +82,7 @@ export default function Footer() {
                 href="https://www.youtube.com/@imma2025"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-9 items-center justify-center rounded-full bg-white/10 text-[#FF0000] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#FF0000]/10 hover:ring-[#FF0000]/50"
+                className="flex size-9 items-center justify-center rounded-full bg-white text-[#FF0000] ring-1 ring-white/20 transition-all hover:scale-110 hover:bg-[#FF0000]/10 hover:ring-[#FF0000]/50"
               >
                 <YoutubeIcon className="size-4" />
               </a>

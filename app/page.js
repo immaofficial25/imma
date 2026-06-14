@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -8,6 +9,11 @@ import {
   Monitor,
   Users,
   CheckCircle,
+  GraduationCap,
+  BookOpen,
+  ShieldCheck,
+  TrendingUp,
+  Trophy,
 } from "lucide-react";
 
 export default function Home() {
@@ -46,6 +52,16 @@ export default function Home() {
     "Parent-Teacher Communication",
   ];
 
+  const baseMarqueeItems = [
+    { icon: GraduationCap, title: "Smart Learning", desc: "Better Understanding" },
+    { icon: BookOpen, title: "Strong Foundation", desc: "Bright Future" },
+    { icon: ShieldCheck, title: "Safe & Supportive", desc: "Environment" },
+    { icon: TrendingUp, title: "Activity Based", desc: "Practical Learning" },
+    { icon: Trophy, title: "Empowering Young Minds", desc: "For A Better Tomorrow" },
+  ];
+  // Duplicate items enough times so one set is wider than an ultra-wide screen
+  const marqueeItems = [...baseMarqueeItems, ...baseMarqueeItems, ...baseMarqueeItems];
+
   return (
     <div className="relative flex flex-1 flex-col overflow-hidden bg-background font-sans">
       {/* Background Blur */}
@@ -76,17 +92,16 @@ export default function Home() {
               “Empowering Young Minds with Smart Education & Future Skills”
             </p>
 
-            <p className="mx-auto mt-8 max-w-3xl text-base leading-8 text-muted sm:text-lg">
-              We are dedicated to building confident, knowledgeable, and skilled
-              students from Class 4 to Class 8 through modern learning methods
-              and value-based education.
-            </p>
-
-            <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-muted sm:text-lg">
-              Our mission is to prepare students not only for academic success
-              but also for real-life challenges through practical skills,
-              personality development, and digital awareness.
-            </p>
+            <div className="mx-auto mt-8 w-full max-w-4xl overflow-hidden rounded-2xl shadow-2xl">
+              <Image
+                src="/hero_image.png"
+                alt="IMMA Hero Image"
+                width={1200}
+                height={600}
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </div>
 
             <div className="mt-10">
               <Link
@@ -98,6 +113,46 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
+        </section>
+
+        {/* MARQUEE SECTION */}
+        <section className="relative overflow-hidden rounded-3xl bg-[#002D72] py-4 sm:py-6 shadow-lg">
+          <div className="absolute left-0 top-0 z-10 h-full w-8 sm:w-24 bg-gradient-to-r from-[#002D72] to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 z-10 h-full w-8 sm:w-24 bg-gradient-to-l from-[#002D72] to-transparent pointer-events-none" />
+          
+          <div className="marquee-container">
+            {/* First Set */}
+            <div className="flex w-max shrink-0 items-center gap-8 px-4 sm:gap-16 sm:px-8">
+              {marqueeItems.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="flex shrink-0 items-center gap-3 text-white">
+                    <Icon size={40} />
+                    <div>
+                      <h4 className="font-semibold">{item.title}</h4>
+                      <p className="text-sm text-gray-300">{item.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Duplicate Set for Infinite Loop */}
+            <div className="flex w-max shrink-0 items-center gap-8 px-4 sm:gap-16 sm:px-8">
+              {marqueeItems.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="flex shrink-0 items-center gap-3 text-white">
+                    <Icon size={40} />
+                    <div>
+                      <h4 className="font-semibold">{item.title}</h4>
+                      <p className="text-sm text-gray-300">{item.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </section>
 
         {/* WHAT STUDENTS WILL LEARN */}

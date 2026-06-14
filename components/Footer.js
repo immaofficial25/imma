@@ -42,15 +42,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8">
           {/* Brand Column */}
           <div className="space-y-6 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5">
-              <Image
-                src="/footer_logo.png"
-                alt="IMMA Footer Logo"
-                width={200}
-                height={200}
-                className="object-contain drop-shadow-lg"
-                style={{ width: "200px", height: "auto" }}
-              />
+            <Link href="/" className="flex items-center gap-2.5 inline-block">
+              <div className="bg-white p-2 rounded-xl shadow-md inline-flex">
+                <Image
+                  src="/footer_logo.png"
+                  alt="IMMA Footer Logo"
+                  width={200}
+                  height={200}
+                  className="object-contain"
+                  style={{ width: "200px", height: "auto" }}
+                />
+              </div>
             </Link>
 
             <p className="max-w-xs break-words text-sm leading-relaxed text-slate-200">

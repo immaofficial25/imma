@@ -5,9 +5,9 @@ export default function TermsOfServicePage() {
     <div className="flex flex-1 flex-col bg-background font-sans">
       <main className="mx-auto w-full max-w-4xl px-6 py-14 sm:px-10">
         <header className="mb-12 flex flex-col gap-4">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+          {/* <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
             Legal Document
-          </div>
+          </div> */}
           <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
             Terms of Service
           </h1>

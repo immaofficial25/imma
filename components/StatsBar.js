@@ -9,25 +9,25 @@ export default function StatsBar() {
   const stats = [
     {
       icon: GraduationCap,
-      value: "15,000+",
+      value: "5,000+",
       label: "Students Enrolled",
       color: "bg-blue-100 text-blue-600",
     },
     {
       icon: BookOpen,
-      value: "200+",
+      value: "50+",
       label: "Expert Mentors",
       color: "bg-green-100 text-green-600",
     },
     {
       icon: Library,
-      value: "500+",
+      value: "30+",
       label: "Courses Available",
       color: "bg-orange-100 text-orange-600",
     },
     {
       icon: Award,
-      value: "98%",
+      value: "100%",
       label: "Success Rate",
       color: "bg-yellow-100 text-yellow-600",
     },

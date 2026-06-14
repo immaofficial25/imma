@@ -16,6 +16,8 @@ import {
   Trophy,
 } from "lucide-react";
 
+import StatsBar from "@/components/StatsBar";
+
 export default function Home() {
   const outcomes = [
     "Better Communication Skills",
@@ -103,6 +105,9 @@ export default function Home() {
               />
             </div>
 
+            {/* STATS SECTION */}
+            <StatsBar />
+
             <div className="mt-10">
               <Link
                 href="/courses"
@@ -115,11 +120,13 @@ export default function Home() {
           </motion.div>
         </section>
 
+
+
         {/* MARQUEE SECTION */}
         <section className="relative overflow-hidden rounded-3xl bg-[#002D72] py-4 sm:py-6 shadow-lg">
           <div className="absolute left-0 top-0 z-10 h-full w-8 sm:w-24 bg-gradient-to-r from-[#002D72] to-transparent pointer-events-none" />
           <div className="absolute right-0 top-0 z-10 h-full w-8 sm:w-24 bg-gradient-to-l from-[#002D72] to-transparent pointer-events-none" />
-          
+
           <div className="marquee-container">
             {/* First Set */}
             <div className="flex w-max shrink-0 items-center gap-8 px-4 sm:gap-16 sm:px-8">
